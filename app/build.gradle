@@ -29,6 +29,14 @@ dependencies {
     compile 'com.android.support:design:25.0.0'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:recyclerview-v7:25.0.0'
+    /*Butterknife*/
     compile 'com.jakewharton:butterknife:8.4.0'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    /*MOXY*/
+    compile 'com.arello-mobile:moxy-app-compat:1.1.2'
+    apt 'com.arello-mobile:moxy-compiler:1.1.2'
+    /*Mask for phone number*/
+    compile 'com.github.pinball83:masked-edittext:1.0.3'
+    
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta2'
 }
