@@ -21,6 +21,12 @@ android {
     }
 }
 
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -38,6 +44,10 @@ dependencies {
     apt 'com.arello-mobile:moxy-compiler:1.1.2'
     /*Mask for phone number*/
     compile 'com.github.pinball83:masked-edittext:1.0.3'
-    
+    /*Driver select view pager*/
+    compile 'com.github.crosswall:Android-Coverflow:release-v1.0.4'
+    /*Circle imageView*/
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta2'
 }

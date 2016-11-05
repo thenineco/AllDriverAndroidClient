@@ -7,12 +7,14 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.soberdriver.client.soberdriver.R;
 import com.soberdriver.client.soberdriver.presentation.presenter.OrderPresenter;
 import com.soberdriver.client.soberdriver.presentation.view.OrderView;
+import com.soberdriver.client.soberdriver.ui.fragment.DriverFilterFragment;
 import com.soberdriver.client.soberdriver.ui.view.AppCustomToolbar;
 
 import butterknife.BindView;
@@ -52,6 +54,8 @@ public class OrderActivity extends BaseAppActivity implements OrderView {
     LinearLayout mSelectFinalLocationBtn;
     @BindView(R.id.order_final_location_text_view)
     AppCompatTextView mFinalLocationTextView;
+    @BindView(R.id.order_main_container)
+    FrameLayout mMainContainer;
     private int mDriverCount = 1;
     @InjectPresenter
     OrderPresenter mOrderPresenter;
@@ -113,10 +117,26 @@ public class OrderActivity extends BaseAppActivity implements OrderView {
             case R.id.order_fast_order_btn:
                 break;
             case R.id.order_select_driver_options_text_view:
+                openDriverFilter();
                 break;
             case R.id.order_create_order_btn:
+                startDriverSelect();
                 break;
         }
+    }
+
+    private void startDriverSelect() {
+        startActivity(SelectDriverActivity.getIntent(this));
+    }
+
+    @Override
+    public void openDriverFilter() {
+        DriverFilterFragment driverFilterFragment = DriverFilterFragment.newInstance();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.order_main_container, driverFilterFragment)
+                .commit();
+
     }
 
     @Override

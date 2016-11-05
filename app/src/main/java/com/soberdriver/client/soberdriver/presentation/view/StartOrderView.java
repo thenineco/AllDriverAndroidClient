@@ -2,9 +2,6 @@ package com.soberdriver.client.soberdriver.presentation.view;
 
 import com.arellomobile.mvp.MvpView;
 
-public interface OrderView extends MvpView {
+public interface StartOrderView extends MvpView {
 
-    void setDriverCount();
-
-    void openDriverFilter();
 }

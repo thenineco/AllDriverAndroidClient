@@ -74,15 +74,9 @@ public class InputSecurityCodeActivity extends BaseAppActivity implements InputS
             new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
-                    int heightDiff =
-                            mScrollView.getRootView().getHeight() - mScrollView.getHeight();
-                    int contentViewTop = getWindow().findViewById(
-                            Window.ID_ANDROID_CONTENT).getTop();
-                    if (heightDiff <= contentViewTop) {
-                        mScrollView.smoothScrollBy(0,
-                                DisplayUtil.getDisplayHeight(InputSecurityCodeActivity.this));
 
-                    }
+                    mScrollView.smoothScrollBy(0,
+                            DisplayUtil.getDisplayHeight(InputSecurityCodeActivity.this));
                 }
             };
 

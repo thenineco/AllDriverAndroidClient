@@ -8,7 +8,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.activity.registration.InputPhoneNumberActivity"
+            android:name=".ui.activity.OrderActivity"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,11 +24,18 @@
         <activity
             android:name=".ui.activity.RangeOfServiceActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.OrderActivity"
-            android:screenOrientation="portrait" />
+        <!--<activity-->
+        <!--android:name=".ui.activity.OrderActivity"-->
+        <!--android:screenOrientation="portrait" />-->
         <activity
             android:name=".ui.activity.SelectLocationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.SelectDriverActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.activity.StartOrderActivity"
             android:screenOrientation="portrait" />
     </application>
 

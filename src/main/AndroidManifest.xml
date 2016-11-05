@@ -1,4 +1,4 @@
-<<<<<<< Original<<<<<<< Original<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<<<<<<< Original<<<<<<< Original<<<<<<< Original<<<<<<< Original<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
 <application>
     <activity android:name="com.soberdriver.client.soberdriver.RangeOfServiceActivity" />
@@ -16,5 +16,20 @@
 
 <application>
     <activity android:name="com.soberdriver.client.soberdriver.SelectStartLocationActivity" />
+</application>
+</manifest>>>>>>>> Added
+
+    =======<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+<application>
+    <activity
+        android:name="com.soberdriver.client.soberdriver.presentation.presenter.SelectDriverActivity" />
+</application>
+</manifest>>>>>>>> Added
+
+    =======<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+<application>
+    <activity android:name="com.soberdriver.client.soberdriver.StartOrderActivity" />
 </application>
 </manifest>>>>>>>> Added
