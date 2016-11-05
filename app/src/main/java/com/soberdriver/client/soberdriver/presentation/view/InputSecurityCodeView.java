@@ -1,4 +1,4 @@
-package com.soberdriver.client.soberdriver.mvp.view;
+package com.soberdriver.client.soberdriver.presentation.view;
 
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;

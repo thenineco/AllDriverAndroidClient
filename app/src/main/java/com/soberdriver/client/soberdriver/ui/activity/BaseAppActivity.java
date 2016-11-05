@@ -1,4 +1,4 @@
-package com.soberdriver.client.soberdriver.ui.activities;
+package com.soberdriver.client.soberdriver.ui.activity;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 

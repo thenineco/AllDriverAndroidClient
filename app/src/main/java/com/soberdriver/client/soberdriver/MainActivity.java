@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.soberdriver.client.soberdriver.ui.activities.registration.InputPhoneNumberActivity;
+import com.soberdriver.client.soberdriver.ui.activity.registration.InputPhoneNumberActivity;
 
 public class MainActivity extends AppCompatActivity {
 

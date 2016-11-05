@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <include layout="@layout/app_bar_main" />
+            <include layout="@layout/app_toolbar" />
 
 
             <android.support.v7.widget.AppCompatTextView

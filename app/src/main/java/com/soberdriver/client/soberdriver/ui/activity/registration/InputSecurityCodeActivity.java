@@ -1,4 +1,4 @@
-package com.soberdriver.client.soberdriver.ui.activities.registration;
+package com.soberdriver.client.soberdriver.ui.activity.registration;
 
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
@@ -11,9 +11,10 @@ import android.widget.ScrollView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.soberdriver.client.soberdriver.R;
-import com.soberdriver.client.soberdriver.mvp.presenter.InputSecurityCodePresenter;
-import com.soberdriver.client.soberdriver.mvp.view.InputSecurityCodeView;
-import com.soberdriver.client.soberdriver.ui.activities.BaseAppActivity;
+import com.soberdriver.client.soberdriver.presentation.presenter.InputSecurityCodePresenter;
+import com.soberdriver.client.soberdriver.presentation.view.InputSecurityCodeView;
+import com.soberdriver.client.soberdriver.ui.activity.BaseAppActivity;
+import com.soberdriver.client.soberdriver.ui.activity.RangeOfServiceActivity;
 import com.soberdriver.client.soberdriver.ui.view.SelectableEdithText;
 import com.soberdriver.client.soberdriver.ui.view.SelectablePhoneEditText;
 import com.soberdriver.client.soberdriver.utils.DisplayUtil;
@@ -81,7 +82,7 @@ public class InputSecurityCodeActivity extends BaseAppActivity implements InputS
                         mScrollView.smoothScrollBy(0,
                                 DisplayUtil.getDisplayHeight(InputSecurityCodeActivity.this));
 
-                    } 
+                    }
                 }
             };
 
@@ -111,5 +112,6 @@ public class InputSecurityCodeActivity extends BaseAppActivity implements InputS
 
     @OnClick(R.id.input_security_code_send_code_btn)
     public void onClick() {
+        startActivity(RangeOfServiceActivity.getIntent(this));
     }
 }
