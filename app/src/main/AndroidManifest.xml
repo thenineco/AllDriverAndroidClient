@@ -27,6 +27,9 @@
         <activity
             android:name=".ui.activity.OrderActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.SelectLocationActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

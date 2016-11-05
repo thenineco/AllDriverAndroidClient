@@ -21,6 +21,11 @@ import butterknife.OnClick;
 
 public class OrderActivity extends BaseAppActivity implements OrderView {
     public static final String TAG = "OrderActivity";
+
+    public static final int START_LOCATION = 1;
+
+    public static final int FINISH_LOCATION = 2;
+
     @BindView(R.id.toolbar_view)
     AppCustomToolbar mToolbarView;
     @BindView(R.id.order_minus_btn)
@@ -31,7 +36,7 @@ public class OrderActivity extends BaseAppActivity implements OrderView {
     AppCompatTextView mOrderDriverCount;
     @BindView(R.id.order_client_location)
     AppCompatTextView mOrderClientLocation;
-    @BindView(R.id.order_ocation_btn)
+    @BindView(R.id.order_location_btn)
     AppCompatImageView mOrderLocationBtn;
     @BindView(R.id.the_cost_of_travel_text_view)
     AppCompatTextView mTheCostOfTravelTextView;
@@ -43,6 +48,10 @@ public class OrderActivity extends BaseAppActivity implements OrderView {
     AppCompatTextView mOrderSelectDriverOptionsTextView;
     @BindView(R.id.order_create_order_btn)
     AppCompatButton mOrderCreateOrderBtn;
+    @BindView(R.id.order_select_final_location_btn)
+    LinearLayout mSelectFinalLocationBtn;
+    @BindView(R.id.order_final_location_text_view)
+    AppCompatTextView mFinalLocationTextView;
     private int mDriverCount = 1;
     @InjectPresenter
     OrderPresenter mOrderPresenter;
@@ -63,6 +72,7 @@ public class OrderActivity extends BaseAppActivity implements OrderView {
 
     private void setStartParameters() {
         setDriverCount();
+        mSelectFinalLocationBtn.setVisibility(View.VISIBLE);
         mOrderMinusBtn.setAlpha(.5f);
     }
 
@@ -72,16 +82,17 @@ public class OrderActivity extends BaseAppActivity implements OrderView {
     }
 
     @OnClick({R.id.order_minus_btn, R.id.order_plus_btn, R.id.order_client_location,
-            R.id.order_ocation_btn, R.id.order_fast_order_btn,
+            R.id.order_location_btn, R.id.order_fast_order_btn,
             R.id.order_select_driver_options_text_view, R.id.order_create_order_btn})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.order_minus_btn:
+                mDriverCount -= 1;
                 if (mDriverCount > 1) {
-                    mDriverCount -= 1;
                     mOrderMinusBtn.setAlpha(1f);
                 } else {
                     mOrderMinusBtn.setAlpha(.5f);
+                    mDriverCount = 1;
                 }
                 setDriverCount();
                 break;
@@ -96,7 +107,8 @@ public class OrderActivity extends BaseAppActivity implements OrderView {
                 break;
             case R.id.order_client_location:
                 break;
-            case R.id.order_ocation_btn:
+            case R.id.order_location_btn:
+                startSelectLocationActivity(START_LOCATION);
                 break;
             case R.id.order_fast_order_btn:
                 break;
@@ -105,5 +117,30 @@ public class OrderActivity extends BaseAppActivity implements OrderView {
             case R.id.order_create_order_btn:
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            String address = data.getStringExtra(SelectLocationActivity.LOCATION);
+            if (requestCode == FINISH_LOCATION && !address.isEmpty()) {
+                mSelectFinalLocationBtn.setVisibility(View.GONE);
+                mOrderFinalLocationInfoContainer.setVisibility(View.VISIBLE);
+                mFinalLocationTextView.setText(address);
+            } else if (requestCode == START_LOCATION) {
+                mOrderClientLocation.setText(address);
+            }
+        }
+
+    }
+
+    @OnClick({R.id.order_select_final_location_btn, R.id.order_final_location_info_container})
+    public void onClick() {
+        startSelectLocationActivity(FINISH_LOCATION);
+    }
+
+    private void startSelectLocationActivity(int requestCode) {
+        startActivityForResult(SelectLocationActivity.getIntent(this), requestCode);
     }
 }

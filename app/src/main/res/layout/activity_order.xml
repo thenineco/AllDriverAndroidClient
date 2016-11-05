@@ -81,7 +81,7 @@
                 android:text="Ваше местоположение" />
 
             <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/order_ocation_btn"
+                android:id="@+id/order_location_btn"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 app:srcCompat="@drawable/map_marker" />
@@ -99,9 +99,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/order_final_location_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -133,11 +135,37 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/order_select_final_location_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="примерная стоимость поездки"
+                android:textColor="@color/colorBlack"
+                android:textSize="20dp" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@color/colorBlack" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/order_fast_order_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:orientation="vertical">
 
             <android.support.v7.widget.AppCompatTextView
