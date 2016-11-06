@@ -10,6 +10,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.soberdriver.client.soberdriver.R;
 import com.soberdriver.client.soberdriver.presentation.presenter.RangeOfPresenter;
 import com.soberdriver.client.soberdriver.presentation.view.RangeOfView;
+import com.soberdriver.client.soberdriver.ui.activity.MainOrderActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -71,10 +72,7 @@ public class RangeOfServiceFragment extends BaseAppFragment implements RangeOfVi
     }
 
     private void startNewOrderFragment() {
-        getActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.range_of_service_container, NewOrderFragment.newInstance())
-                .addToBackStack(getClass().getName())
-                .commit();
+        ((MainOrderActivity) getActivity())
+                .openFragment(NewOrderFragment.newInstance());
     }
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
@@ -15,12 +16,15 @@ import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.soberdriver.client.soberdriver.R;
 import com.soberdriver.client.soberdriver.presentation.presenter.MainOrderPresenter;
 import com.soberdriver.client.soberdriver.presentation.view.MainOrderView;
+import com.soberdriver.client.soberdriver.ui.fragment.BaseAppFragment;
 import com.soberdriver.client.soberdriver.ui.fragment.RangeOfServiceFragment;
+import com.soberdriver.client.soberdriver.ui.fragment.UserHistoryFragment;
 import com.soberdriver.client.soberdriver.ui.view.AppCustomToolbar;
 import com.soberdriver.client.soberdriver.utils.DisplayUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainOrderActivity extends BaseAppActivity implements MainOrderView {
     public static final String TAG = "MainOrderActivity";
@@ -31,6 +35,10 @@ public class MainOrderActivity extends BaseAppActivity implements MainOrderView 
     AppCustomToolbar mToolbarView;
     @BindView(R.id.main_drawer_layout)
     DrawerLayout mMainDrawerLayout;
+    @BindView(R.id.user_menu_user_name_text_view)
+    AppCompatTextView mUserMenuUserNameTextView;
+    @BindView(R.id.user_menu_phone_number_text_view)
+    AppCompatTextView mUserMenuPhoneNumberTextView;
     private MaterialMenuDrawable materialMenu;
     private boolean menuIsOpen;
 
@@ -43,14 +51,14 @@ public class MainOrderActivity extends BaseAppActivity implements MainOrderView 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_range_of_service);
+        setContentView(R.layout.activity_main_order);
         ButterKnife.bind(this);
         setToolbar();
         setDrawerView();
-        setRangeOfServiceFragment();
+        openRangeOfServiceFragment();
     }
 
-    private void setRangeOfServiceFragment() {
+    private void openRangeOfServiceFragment() {
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.range_of_service_container, RangeOfServiceFragment.newInstance())
@@ -110,5 +118,44 @@ public class MainOrderActivity extends BaseAppActivity implements MainOrderView 
 
             }
         });
+    }
+
+    @OnClick({R.id.user_menu_user_name_text_view, R.id.user_menu_phone_number_text_view,
+            R.id.user_menu_user_order_history_text_view, R.id.user_menu_user_payment_text_view,
+            R.id.user_menu_user_drivers_text_view, R.id.user_menu_promo_cod_text_view,
+            R.id.user_menu_rates_text_view, R.id.user_menu_travel_safety_text_view,
+            R.id.user_menu_about_company_text_view})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.user_menu_user_name_text_view:
+                break;
+            case R.id.user_menu_phone_number_text_view:
+                break;
+            case R.id.user_menu_user_order_history_text_view:
+                break;
+            case R.id.user_menu_user_payment_text_view:
+                break;
+            case R.id.user_menu_user_drivers_text_view:
+                openFragment(UserHistoryFragment.newInstance());
+                break;
+            case R.id.user_menu_promo_cod_text_view:
+                break;
+            case R.id.user_menu_rates_text_view:
+                break;
+            case R.id.user_menu_travel_safety_text_view:
+                break;
+            case R.id.user_menu_about_company_text_view:
+                break;
+        }
+    }
+
+    public void openFragment(BaseAppFragment fragment) {
+        mMainDrawerLayout.closeDrawers();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.range_of_service_container, fragment)
+                .addToBackStack(fragment.getClass().getName())
+                .commit();
+
     }
 }
