@@ -204,6 +204,7 @@
                     android:layout_marginRight="10dp"
                     android:background="@null"
                     android:gravity="top"
+                    android:focusable="false"
                     android:hint="Добавить комментарий о внешнем виде... "
                     android:textSize="13sp" />
             </FrameLayout>

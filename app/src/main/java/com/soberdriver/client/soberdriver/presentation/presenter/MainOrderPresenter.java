@@ -3,9 +3,9 @@ package com.soberdriver.client.soberdriver.presentation.presenter;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.soberdriver.client.soberdriver.presentation.view.DriverFilterView;
+import com.soberdriver.client.soberdriver.presentation.view.MainOrderView;
 
 @InjectViewState
-public class DriverFilterPresenter extends MvpPresenter<DriverFilterView> {
+public class MainOrderPresenter extends MvpPresenter<MainOrderView> {
 
 }

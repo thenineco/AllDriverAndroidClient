@@ -48,6 +48,8 @@ dependencies {
     compile 'com.github.crosswall:Android-Coverflow:release-v1.0.4'
     /*Circle imageView*/
     compile 'de.hdodenhof:circleimageview:2.1.0'
+    /*Material menu*/
+    compile 'com.balysv.materialmenu:material-menu:2.0.0'
 
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta2'
 }

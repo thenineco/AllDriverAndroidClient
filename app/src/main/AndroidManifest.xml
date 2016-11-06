@@ -8,8 +8,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.activity.OrderActivity"
-            android:windowSoftInputMode="adjustResize">
+            android:name=".ui.activity.MainOrderActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,12 +21,12 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
 
-        <activity
-            android:name=".ui.activity.RangeOfServiceActivity"
-            android:screenOrientation="portrait" />
         <!--<activity-->
-        <!--android:name=".ui.activity.OrderActivity"-->
+        <!--android:name=".ui.activity.MainOrderActivity"-->
         <!--android:screenOrientation="portrait" />-->
+        <activity
+            android:name=".ui.activity.OrderActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.SelectLocationActivity"
             android:screenOrientation="portrait" />
@@ -36,6 +36,13 @@
 
         <activity
             android:name=".ui.activity.StartOrderActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.activity.DriverProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.DriverFilterActivity"
             android:screenOrientation="portrait" />
     </application>
 

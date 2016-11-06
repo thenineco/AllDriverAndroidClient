@@ -1,13 +1,14 @@
-package com.soberdriver.client.soberdriver.ui.fragment;
+package com.soberdriver.client.soberdriver.ui.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.SwitchCompat;
-import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ScrollView;
 
@@ -22,8 +23,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class DriverFilterFragment extends BaseAppFragment implements DriverFilterView {
-    public static final String TAG = "DriverFilterFragment";
+public class DriverFilterActivity extends BaseAppActivity implements DriverFilterView {
+    public static final String TAG = "DriverFilterActivity";
     @InjectPresenter
     DriverFilterPresenter mPresenter;
     @BindView(R.id.driver_filter_close_btn)
@@ -58,25 +59,16 @@ public class DriverFilterFragment extends BaseAppFragment implements DriverFilte
     private Unbinder unbinder;
     private boolean keyboardListenersAttached;
 
-    public static DriverFilterFragment newInstance() {
-        DriverFilterFragment fragment = new DriverFilterFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+    public static Intent getIntent(final Context context) {
+        Intent intent = new Intent(context, DriverFilterActivity.class);
+        return intent;
     }
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-            final Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_driver_filter, container, false);
-        unbinder = ButterKnife.bind(this, view);
-        return view;
-    }
-
-
-    @Override
-    public void onViewCreated(final View view, final Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        setContentView(R.layout.activity_driver_filter);
+        super.onCreate(savedInstanceState);
+        ButterKnife.bind(this);
         attachKeyboardListeners();
     }
 
@@ -86,7 +78,7 @@ public class DriverFilterFragment extends BaseAppFragment implements DriverFilte
                 public void onGlobalLayout() {
                     try {
                         mScrollView.smoothScrollBy(0,
-                                DisplayUtil.getDisplayHeight(getContext()));
+                                DisplayUtil.getDisplayHeight(DriverFilterActivity.this));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -96,6 +88,14 @@ public class DriverFilterFragment extends BaseAppFragment implements DriverFilte
 
 
     void attachKeyboardListeners() {
+        mCommentForDriverEditText.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                mCommentForDriverEditText.setFocusable(true);
+                mCommentForDriverEditText.setFocusableInTouchMode(true);
+                return false;
+            }
+        });
         if (keyboardListenersAttached) {
             return;
         }
@@ -135,18 +135,16 @@ public class DriverFilterFragment extends BaseAppFragment implements DriverFilte
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
+    protected void onDestroy() {
+        super.onDestroy();
 
+        if (keyboardListenersAttached) {
+            mScrollView.getViewTreeObserver().removeOnGlobalLayoutListener(keyboardLayoutListener);
+        }
+    }
 
     @Override
     public void closeFragment() {
-        getActivity()
-                .getSupportFragmentManager()
-                .beginTransaction()
-                .remove(this)
-                .commit();
+        onBackPressed();
     }
 }

@@ -1,11 +1,11 @@
 package com.soberdriver.client.soberdriver.presentation.presenter;
 
 
-import com.soberdriver.client.soberdriver.presentation.view.RangeOfServiceView;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.soberdriver.client.soberdriver.presentation.view.DriverProfileView;
 
 @InjectViewState
-public class RangeOfServicePresenter extends MvpPresenter<RangeOfServiceView> {
+public class DriverProfilePresenter extends MvpPresenter<DriverProfileView> {
 
 }

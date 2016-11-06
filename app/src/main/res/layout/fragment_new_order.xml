@@ -1,13 +1,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/order_main_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/order_main_container">
-
-    <com.soberdriver.client.soberdriver.ui.view.AppCustomToolbar
-        android:id="@+id/toolbar_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    android:background="@color/colorWhite">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -235,5 +231,4 @@
             android:textColor="@color/colorWhite" />
 
     </LinearLayout>
-
 </FrameLayout>
