@@ -1,0 +1,62 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/app_toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?actionBarSize"
+        android:orientation="vertical">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/walkthrough_view_pager"
+            android:layout_width="250dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:text="здесь будет рассказано
+О ВОЗМОЖНОСТЯХ ПРИЛОЖЕНИЯ" />
+
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/walkthrough_circle_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/walkthrough_next_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:background="@color/colorPrimaryDark"
+            android:text="Далее"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/walkthrough_skip_btn"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal|bottom">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/walkthrough_skip_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="30dp"
+            android:text="Пропустить"
+            android:textColor="@color/colorBlack" />
+    </FrameLayout>
+</FrameLayout>

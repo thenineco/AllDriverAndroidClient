@@ -17,8 +17,9 @@ import com.soberdriver.client.soberdriver.R;
 import com.soberdriver.client.soberdriver.presentation.presenter.MainOrderPresenter;
 import com.soberdriver.client.soberdriver.presentation.view.MainOrderView;
 import com.soberdriver.client.soberdriver.ui.fragment.BaseAppFragment;
+import com.soberdriver.client.soberdriver.ui.fragment.NewOrderFragment;
 import com.soberdriver.client.soberdriver.ui.fragment.RangeOfServiceFragment;
-import com.soberdriver.client.soberdriver.ui.fragment.UserHistoryFragment;
+import com.soberdriver.client.soberdriver.ui.fragment.UserHistoryActivity;
 import com.soberdriver.client.soberdriver.ui.view.AppCustomToolbar;
 import com.soberdriver.client.soberdriver.utils.DisplayUtil;
 
@@ -28,21 +29,27 @@ import butterknife.OnClick;
 
 public class MainOrderActivity extends BaseAppActivity implements MainOrderView {
     public static final String TAG = "MainOrderActivity";
+    private static boolean sRangeOfService;
     @InjectPresenter
     MainOrderPresenter mMainOrderPresenter;
 
     @BindView(R.id.toolbar)
     AppCustomToolbar mToolbarView;
+
     @BindView(R.id.main_drawer_layout)
     DrawerLayout mMainDrawerLayout;
+
     @BindView(R.id.user_menu_user_name_text_view)
     AppCompatTextView mUserMenuUserNameTextView;
+
     @BindView(R.id.user_menu_phone_number_text_view)
     AppCompatTextView mUserMenuPhoneNumberTextView;
+
     private MaterialMenuDrawable materialMenu;
     private boolean menuIsOpen;
 
-    public static Intent getIntent(final Context context) {
+    public static Intent getIntent(final Context context, boolean rangeOfService) {
+        sRangeOfService = rangeOfService;
         Intent intent = new Intent(context, MainOrderActivity.class);
         return intent;
     }
@@ -55,7 +62,18 @@ public class MainOrderActivity extends BaseAppActivity implements MainOrderView 
         ButterKnife.bind(this);
         setToolbar();
         setDrawerView();
-        openRangeOfServiceFragment();
+        if (sRangeOfService) {
+            openRangeOfServiceFragment();
+        } else {
+            openOrderFragment();
+        }
+    }
+
+    private void openOrderFragment() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.range_of_service_container, NewOrderFragment.newInstance())
+                .commit();
     }
 
     private void openRangeOfServiceFragment() {
@@ -128,17 +146,28 @@ public class MainOrderActivity extends BaseAppActivity implements MainOrderView 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.user_menu_user_name_text_view:
+                startActivity(UserProfileActivity.getIntent(this));
+                mMainDrawerLayout.closeDrawers();
                 break;
             case R.id.user_menu_phone_number_text_view:
+                startActivity(UserProfileActivity.getIntent(this));
+                mMainDrawerLayout.closeDrawers();
                 break;
             case R.id.user_menu_user_order_history_text_view:
+                startActivity(UserHistoryActivity.getIntent(this));
+                mMainDrawerLayout.closeDrawers();
                 break;
             case R.id.user_menu_user_payment_text_view:
+                startActivity(PaymentActivity.getIntent(this));
+                mMainDrawerLayout.closeDrawers();
                 break;
             case R.id.user_menu_user_drivers_text_view:
-                openFragment(UserHistoryFragment.newInstance());
+                startActivityForResult(UserDriversActivity.getIntent(this), 1);
+                mMainDrawerLayout.closeDrawers();
                 break;
             case R.id.user_menu_promo_cod_text_view:
+                startActivity(PromoActivity.getIntent(this));
+                mMainDrawerLayout.closeDrawers();
                 break;
             case R.id.user_menu_rates_text_view:
                 break;
@@ -146,6 +175,14 @@ public class MainOrderActivity extends BaseAppActivity implements MainOrderView 
                 break;
             case R.id.user_menu_about_company_text_view:
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            openOrderFragment();
         }
     }
 

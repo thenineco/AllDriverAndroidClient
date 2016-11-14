@@ -15,6 +15,8 @@ import com.soberdriver.client.soberdriver.presentation.view.SelectStartLocationV
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ru.yandex.yandexmapkit.MapController;
+import ru.yandex.yandexmapkit.MapView;
 
 public class SelectLocationActivity extends BaseAppActivity implements
         SelectStartLocationView {
@@ -32,10 +34,13 @@ public class SelectLocationActivity extends BaseAppActivity implements
     AppCompatEditText mLocationSearchEditText;
     @BindView(R.id.select_location_microphone_btn)
     AppCompatImageView mMicrophoneBtn;
+    @BindView(R.id.select_location_map_view)
+    MapView mMapView;
+
+    private MapController mMapController;
 
     public static Intent getIntent(final Context context) {
         Intent intent = new Intent(context, SelectLocationActivity.class);
-
         return intent;
     }
 
@@ -45,7 +50,7 @@ public class SelectLocationActivity extends BaseAppActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_start_location);
         ButterKnife.bind(this);
-
+        mMapController = mMapView.getMapController();
     }
 
     @OnClick({R.id.select_location_back_btn, R.id.select_location_microphone_btn})

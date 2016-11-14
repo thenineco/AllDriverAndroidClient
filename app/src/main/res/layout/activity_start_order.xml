@@ -139,7 +139,8 @@
                             android:layout_weight="1"
                             android:background="@color/colorPrimary"
                             android:text="позвонить"
-                            android:textAllCaps="true" />
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorWhite" />
 
                         <android.support.v7.widget.AppCompatButton
                             android:id="@+id/start_order_cancel_btn"
@@ -149,7 +150,8 @@
                             android:layout_weight="1"
                             android:background="@color/colorPrimary"
                             android:text="отменить"
-                            android:textAllCaps="true" />
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorWhite" />
                     </LinearLayout>
 
                     <FrameLayout
@@ -160,15 +162,15 @@
                         android:background="@drawable/layout_border">
 
                         <android.support.v7.widget.AppCompatEditText
-                            android:focusable="false"
                             android:id="@+id/start_order_more_info_edit_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
                             android:layout_marginTop="7dp"
-                            android:inputType="textCapSentences"
                             android:background="@null"
+                            android:focusable="false"
                             android:hint="Введите текст..."
+                            android:inputType="textCapSentences"
                             android:textSize="12sp" />
 
                     </FrameLayout>

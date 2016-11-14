@@ -8,11 +8,11 @@
         android:layout_height="match_parent"
         android:background="@color/colorMaterialGray400">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Map" />
+        <ru.yandex.yandexmapkit.MapView
+            android:id="@+id/select_location_map_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:apiKey="hzWJxRleUvs1gjYiJsK9UJj8BywNg2B3XJThOOlugoHWx5wLB1ylR1eeXXSpCV-WPOLRGG-yFatJHvQbMXY6jbS1pPez3elni7ZpR-B4AJQ=" />
     </FrameLayout>
 
     <FrameLayout

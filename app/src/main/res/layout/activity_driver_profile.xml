@@ -11,7 +11,7 @@
         android:layout_gravity="right"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        app:srcCompat="@drawable/close_icon" />
+        app:srcCompat="@drawable/close_icon_black" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginLeft="20dp"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/launcher"
             app:civ_border_color="@color/colorPrimary"
             app:civ_border_width="1dp" />
 
@@ -171,7 +171,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/launcher"
             app:civ_border_color="@color/colorPrimary"
             app:civ_border_width="1dp" />
 
@@ -180,7 +180,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/launcher"
             app:civ_border_color="@color/colorPrimary"
             app:civ_border_width="1dp" />
 
@@ -189,7 +189,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/launcher"
             app:civ_border_color="@color/colorPrimary"
             app:civ_border_width="1dp" />
 
@@ -198,7 +198,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/launcher"
             app:civ_border_color="@color/colorPrimary"
             app:civ_border_width="1dp" />
 
@@ -207,7 +207,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/launcher"
             app:civ_border_color="@color/colorPrimary"
             app:civ_border_width="1dp" />
 

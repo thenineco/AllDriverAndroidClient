@@ -105,6 +105,7 @@ public class InputSecurityCodeActivity extends BaseAppActivity implements InputS
 
     @OnClick(R.id.input_security_code_send_code_btn)
     public void onClick() {
-        startActivity(MainOrderActivity.getIntent(this));
+
+        startActivity(AddUserCarActivity.getIntent(this));
     }
 }

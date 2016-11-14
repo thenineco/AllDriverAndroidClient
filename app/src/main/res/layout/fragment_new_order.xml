@@ -55,6 +55,14 @@
             android:layout_marginTop="10dp"
             android:background="@color/colorBlack" />
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/order_drivers_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="100dp"
+            android:layout_marginTop="20dp"
+            android:visibility="gone" />
+
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -193,6 +201,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/order_select_driver_options_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -211,14 +220,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorBlack" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Вы можете выбрать его категорию, одежду и т.д" />
         </LinearLayout>
 
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="Вы можете выбрать его категорию, одежду и т.д" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/order_create_order_btn"

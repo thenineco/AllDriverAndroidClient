@@ -1,5 +1,5 @@
-<<<<<<< Original<<<<<<< Original<<<<<<< Original<<<<<<< Original<<<<<<< Original<manifest
-xmlns:android="http://schemas.android.com/apk/res/android">
+<<<<<<< Original<<<<<<< Original<<<<<<< Original<<<<<<< Original<<<<<<< Original<<<<<<< Original<<<<<<< Original<<<<<<< Original<<<<<<< Original<<<<<<< Original<<<<<<< Original<<<<<<<
+Original<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
 <application>
     <activity android:name="com.soberdriver.client.soberdriver.RangeOfServiceActivity" />
@@ -39,5 +39,54 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 
 <application>
     <activity android:name="com.soberdriver.client.soberdriver.DriverProfileActivity" />
+</application>
+</manifest>>>>>>>> Added
+
+    =======<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+<application>
+    <activity android:name="com.soberdriver.client.soberdriver.AddNewCardActivity" />
+</application>
+</manifest>>>>>>>> Added
+
+    =======<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+<application>
+    <activity android:name="com.soberdriver.client.soberdriver.PaymentActivity" />
+</application>
+</manifest>>>>>>>> Added
+
+    =======<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+<application>
+    <activity android:name="com.soberdriver.client.soberdriver.UserProfileActivity" />
+</application>
+</manifest>>>>>>>> Added
+
+    =======<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+<application>
+    <activity android:name="com.soberdriver.client.soberdriver.PromoActivity" />
+</application>
+</manifest>>>>>>>> Added
+
+    =======<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+<application>
+    <activity android:name="com.soberdriver.client.soberdriver.AddUserCarActivity" />
+</application>
+</manifest>>>>>>>> Added
+
+    =======<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+<application>
+    <activity android:name="com.soberdriver.client.soberdriver.UserDriversActivity" />
+</application>
+</manifest>>>>>>>> Added
+
+    =======<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+<application>
+    <activity android:name="com.soberdriver.client.soberdriver.WalkthroughActivity" />
 </application>
 </manifest>>>>>>>> Added

@@ -24,7 +24,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="right"
-                app:srcCompat="@drawable/close_icon" />
+                app:srcCompat="@drawable/close_icon_black" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:layout_width="wrap_content"

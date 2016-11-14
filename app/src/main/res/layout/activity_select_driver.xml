@@ -28,7 +28,8 @@
                 android:id="@+id/select_driver_view_pager"
                 android:layout_width="200dp"
                 android:layout_height="300dp"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:visibility="gone" />
         </me.crosswall.lib.coverflow.core.PagerContainer>
     </LinearLayout>
 
@@ -50,7 +51,25 @@
         android:layout_marginBottom="60dp"
         android:text="О безопасности поездки"
         android:textColor="@color/colorBlack"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:visibility="gone" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/select_driver_ok_btn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="60dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:text="OK" />
+
+    <ProgressBar
+        android:id="@+id/select_driver_progress_bar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:visibility="gone" />
 
 
 </FrameLayout>

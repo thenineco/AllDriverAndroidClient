@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -18,14 +21,27 @@ import com.soberdriver.client.soberdriver.presentation.view.NewOrderView;
 import com.soberdriver.client.soberdriver.ui.activity.DriverFilterActivity;
 import com.soberdriver.client.soberdriver.ui.activity.SelectDriverActivity;
 import com.soberdriver.client.soberdriver.ui.activity.SelectLocationActivity;
+import com.soberdriver.client.soberdriver.ui.adapter.order.DriverItem;
+import com.soberdriver.client.soberdriver.ui.adapter.order.OrderDriversAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class NewOrderFragment extends BaseAppFragment implements NewOrderView {
+public class NewOrderFragment extends BaseAppFragment implements NewOrderView,
+        OrderDriversAdapter.OnItemClickListener {
 
     public static final String TAG = "NewOrderFragment";
+
+    @BindView(R.id.order_main_container)
+    FrameLayout mOrderMainContainer;
+    @BindView(R.id.order_drivers_recycler_view)
+    RecyclerView mDriversRecyclerView;
+    @BindView(R.id.order_select_driver_options_container)
+    LinearLayout mOrderSelectDriverOptionsContainer;
 
     private int mDriverCount = 1;
 
@@ -60,6 +76,8 @@ public class NewOrderFragment extends BaseAppFragment implements NewOrderView {
     @BindView(R.id.order_create_order_btn)
     AppCompatButton mOrderCreateOrderBtn;
 
+    private List<DriverItem> mDriverList = new ArrayList<>();
+
     public static NewOrderFragment newInstance() {
         NewOrderFragment fragment = new NewOrderFragment();
 
@@ -90,6 +108,7 @@ public class NewOrderFragment extends BaseAppFragment implements NewOrderView {
     }
 
     private void setStartParameters() {
+        mDriversRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         setDriverCount();
         mOrderSelectFinalLocationBtn.setVisibility(View.VISIBLE);
         mOrderMinusBtn.setAlpha(.5f);
@@ -103,8 +122,14 @@ public class NewOrderFragment extends BaseAppFragment implements NewOrderView {
             case R.id.order_minus_btn:
                 mDriverCount -= 1;
                 if (mDriverCount > 1) {
+                    mDriverList.remove(mDriverList.size() - 1);
+                    mDriversRecyclerView.setAdapter(
+                            new OrderDriversAdapter(getContext(), mDriverList, this));
                     mOrderMinusBtn.setAlpha(1f);
                 } else {
+                    mDriversRecyclerView.setVisibility(View.GONE);
+                    mDriverList.clear();
+                    mOrderSelectDriverOptionsContainer.setVisibility(View.VISIBLE);
                     mOrderMinusBtn.setAlpha(.5f);
                     mDriverCount = 1;
                 }
@@ -113,6 +138,18 @@ public class NewOrderFragment extends BaseAppFragment implements NewOrderView {
             case R.id.order_plus_btn:
                 mDriverCount += 1;
                 if (mDriverCount > 1) {
+                    if (mDriversRecyclerView.getVisibility() == View.GONE) {
+                        mDriversRecyclerView.setVisibility(View.VISIBLE);
+                        mOrderSelectDriverOptionsContainer.setVisibility(View.GONE);
+                    }
+                    if (mDriverList.size()==0){
+                        mDriverList.add(new DriverItem());
+                        mDriverList.add(new DriverItem());
+                    }else {
+                        mDriverList.add(new DriverItem());
+                    }
+                    mDriversRecyclerView.setAdapter(
+                            new OrderDriversAdapter(getContext(), mDriverList, this));
                     mOrderMinusBtn.setAlpha(1f);
                 } else {
                     mOrderMinusBtn.setAlpha(.5f);
@@ -161,6 +198,15 @@ public class NewOrderFragment extends BaseAppFragment implements NewOrderView {
             } else if (requestCode == START_LOCATION) {
                 mOrderClientLocation.setText(address);
             }
+        }
+    }
+
+    @Override
+    public void onItemClick(View v) {
+        switch (v.getId()) {
+            case R.id.order_select_start_location_btn:
+                startSelectLocationActivity(START_LOCATION);
+                break;
         }
     }
 }

@@ -10,6 +10,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -39,6 +40,10 @@ public class SelectDriverActivity extends BaseAppActivity implements SelectDrive
     PagerContainer mDriverListContainer;
     @BindView(R.id.select_driver_view_pager)
     ViewPager mSelectDriverViewPager;
+    @BindView(R.id.select_driver_ok_btn)
+    AppCompatButton mOkBtn;
+    @BindView(R.id.select_driver_progress_bar)
+    ProgressBar mProgressBar;
 
     public static Intent getIntent(final Context context) {
         Intent intent = new Intent(context, SelectDriverActivity.class);
@@ -52,6 +57,24 @@ public class SelectDriverActivity extends BaseAppActivity implements SelectDrive
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_driver);
         ButterKnife.bind(this);
+        setStartParams();
+        setViewPager();
+
+    }
+
+    private void setStartParams() {
+        mInfoTextView.setText("Клево! Мы сейчас\n"
+                + "будем подбирать\n"
+                + "водителя. Хочешь\n"
+                + "заранее посмотреть,\n"
+                + "кто приедет -\n"
+                + "оставайся на экране\n"
+                + "\n"
+                + "будет мэджик!\n"
+                + ":)");
+    }
+
+    private void setViewPager() {
         ViewPager pager = mDriverListContainer.getViewPager();
         pager.setAdapter(new DriverSelectPagerAdapter());
         pager.setClipChildren(false);
@@ -73,11 +96,11 @@ public class SelectDriverActivity extends BaseAppActivity implements SelectDrive
                 .scale(0.4f)
                 .spaceSize(50f)
                 .build();
-
     }
 
 
-    @OnClick({R.id.select_driver_cancel_the_order_btn, R.id.select_driver_about_safety_btn})
+    @OnClick({R.id.select_driver_cancel_the_order_btn, R.id.select_driver_about_safety_btn,
+            R.id.select_driver_ok_btn})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.select_driver_cancel_the_order_btn:
@@ -88,7 +111,26 @@ public class SelectDriverActivity extends BaseAppActivity implements SelectDrive
             case R.id.item_driver_select_select_btn:
                 selectDriver();
                 break;
+            case R.id.select_driver_ok_btn:
+                startDriverFind();
+                break;
         }
+    }
+
+    private void startDriverFind() {
+        mInfoTextView.setText("Мы ищем для вас \n водителя");
+        mProgressBar.setVisibility(View.VISIBLE);
+        mAboutSafetyBtn.setVisibility(View.VISIBLE);
+        mOkBtn.setVisibility(View.GONE);
+        mProgressBar.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mProgressBar.setVisibility(View.GONE);
+                mInfoTextView.setText("Выберите водителя котороый вас заберет");
+                mSelectDriverViewPager.setVisibility(View.VISIBLE);
+                setViewPager();
+            }
+        }, 2000);
     }
 
     @Override
@@ -99,6 +141,10 @@ public class SelectDriverActivity extends BaseAppActivity implements SelectDrive
     @Override
     public void selectDriver() {
         startActivity(StartOrderActivity.getIntent(this));
+    }
+
+    @OnClick(R.id.select_driver_ok_btn)
+    public void onClick() {
     }
 
     private class DriverSelectPagerAdapter extends PagerAdapter {

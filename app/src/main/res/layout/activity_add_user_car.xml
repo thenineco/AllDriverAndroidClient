@@ -1,0 +1,71 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <include layout="@layout/app_toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?actionBarSize"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:text="Информация об автомобиле"
+            android:textColor="@color/colorBlack" />
+
+        <com.soberdriver.client.soberdriver.ui.view.SelectableEdithText
+            android:id="@+id/add_user_car_model_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:background="@null"
+            android:focusable="false"
+            android:maxLines="1"
+            android:hint="Марка"
+            android:textColor="@color/colorBlack"
+            android:textSize="20dp" />
+
+        <com.soberdriver.client.soberdriver.ui.view.SelectableEdithText
+            android:id="@+id/add_user_car_color_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:background="@null"
+            android:focusable="false"
+            android:hint="Цвет"
+            android:maxLines="1"
+            android:textColor="@color/colorBlack"
+            android:textSize="20dp" />
+
+        <com.soberdriver.client.soberdriver.ui.view.SelectableEdithText
+            android:id="@+id/add_user_car_number_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:background="@null"
+            android:focusable="false"
+            android:hint="Номер"
+            android:maxLines="1"
+            android:textColor="@color/colorBlack"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/add_user_car_skip_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:text="Пропустить"
+        android:textColor="@color/colorBlack" />
+</RelativeLayout>

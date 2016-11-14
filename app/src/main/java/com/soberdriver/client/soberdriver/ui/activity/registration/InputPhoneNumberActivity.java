@@ -1,5 +1,6 @@
 package com.soberdriver.client.soberdriver.ui.activity.registration;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
@@ -11,6 +12,7 @@ import com.soberdriver.client.soberdriver.mvp.models.User;
 import com.soberdriver.client.soberdriver.presentation.presenter.InputPhoneNumberPresenter;
 import com.soberdriver.client.soberdriver.presentation.view.InputPhoneNumberView;
 import com.soberdriver.client.soberdriver.ui.activity.BaseAppActivity;
+import com.soberdriver.client.soberdriver.ui.activity.DriverProfileActivity;
 import com.soberdriver.client.soberdriver.ui.view.SelectableEdithText;
 import com.soberdriver.client.soberdriver.ui.view.SelectablePhoneEditText;
 
@@ -36,6 +38,14 @@ public class InputPhoneNumberActivity extends BaseAppActivity implements InputPh
     SelectablePhoneEditText mUserPhoneNumberEditText;
     @BindView(R.id.input_phone_number_send_user_data_btn)
     AppCompatButton mSendUserDataBtn;
+
+
+    public static Intent getIntent(final Context context) {
+        Intent intent = new Intent(context, InputPhoneNumberActivity.class);
+
+        return intent;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

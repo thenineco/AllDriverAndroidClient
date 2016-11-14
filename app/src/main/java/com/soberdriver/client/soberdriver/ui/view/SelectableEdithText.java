@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 
 /**
  * Created by zest .
@@ -36,6 +37,14 @@ public class SelectableEdithText extends AppCompatEditText {
         } else {
             this.setHint(hint);
         }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        setFocusable(true);
+        setFocusableInTouchMode(true);
+        requestFocus();
+        return super.onTouchEvent(event);
     }
 
     @Override

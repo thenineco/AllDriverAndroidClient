@@ -24,6 +24,7 @@ android {
 allprojects {
     repositories {
         maven { url "https://jitpack.io" }
+        maven { url 'https://github.com/yandexmobile/yandexmapkit-android/raw/maven/' }
     }
 }
 
@@ -52,6 +53,14 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     /*Material menu*/
     compile 'com.balysv.materialmenu:material-menu:2.0.0'
+    /*Swipe menu recyclerView*/
+    compile 'com.tubb.smrv:swipemenu-recyclerview:3.0.5'
+    /*ViewPager indicator*/
+    compile 'me.relex:circleindicator:1.2.2@aar'
+    /*Expandable layout*/
+    compile 'com.bignerdranch.android:expandablerecyclerview:2.1.1'
+    /*Yandex map kit*/
+    compile 'ru.yandex:yandexmapkit:2.5.1@aar'
 
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta2'
 }
