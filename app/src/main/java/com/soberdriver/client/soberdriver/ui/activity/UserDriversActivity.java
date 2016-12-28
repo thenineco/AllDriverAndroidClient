@@ -6,25 +6,28 @@ import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.module.network.networkmodule.models.orders.Driver;
 import com.soberdriver.client.soberdriver.R;
 import com.soberdriver.client.soberdriver.presentation.presenter.UserDriversPresenter;
 import com.soberdriver.client.soberdriver.presentation.view.UserDriversView;
-import com.soberdriver.client.soberdriver.ui.fragment.NewOrderFragment;
 import com.soberdriver.client.soberdriver.ui.view.AppCustomToolbar;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.crosswall.lib.coverflow.CoverFlow;
-import me.crosswall.lib.coverflow.core.PageItemClickListener;
 import me.crosswall.lib.coverflow.core.PagerContainer;
 
 public class UserDriversActivity extends BaseAppActivity implements UserDriversView,
@@ -40,10 +43,11 @@ public class UserDriversActivity extends BaseAppActivity implements UserDriversV
     PagerContainer mDriverListContainer;
     @BindView(R.id.user_drivers_switch)
     Switch mSwitch;
+    @BindView(R.id.user_drivers_progress_bar)
+    ProgressBar mUserDriversProgressBar;
 
     public static Intent getIntent(final Context context) {
         Intent intent = new Intent(context, UserDriversActivity.class);
-
         return intent;
     }
 
@@ -54,22 +58,25 @@ public class UserDriversActivity extends BaseAppActivity implements UserDriversV
         setContentView(R.layout.activity_user_drivers);
         ButterKnife.bind(this);
         initToolbar();
-        setViewPager();
+        mUserDriversPresenter.findUserDrivers();
     }
 
-    private void setViewPager() {
+    @Override
+    public void showUserDrivers(List<Driver> driverList) {
+        mUserDriversProgressBar.setVisibility(View.GONE);
         ViewPager pager = mDriverListContainer.getViewPager();
-        pager.setAdapter(new DriverSelectPagerAdapter());
+        pager.setAdapter(new DriverSelectPagerAdapter(driverList,
+                driver -> {
+                    startActivity(
+                            DriverInRoadActivity.getIntent(UserDriversActivity.this, driver));
+                    finish();
+                }));
         pager.setClipChildren(false);
         pager.setOffscreenPageLimit(15);
 
-        mDriverListContainer.setPageItemClickListener(new PageItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Toast.makeText(UserDriversActivity.this, "position:" + position,
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+        mDriverListContainer.setPageItemClickListener(
+                (view, position) -> Toast.makeText(UserDriversActivity.this, "position:" + position,
+                        Toast.LENGTH_SHORT).show());
 
         boolean showTransformer = getIntent().getBooleanExtra("showTransformer", false);
 
@@ -102,6 +109,15 @@ public class UserDriversActivity extends BaseAppActivity implements UserDriversV
 
     private class DriverSelectPagerAdapter extends PagerAdapter {
 
+        private SelectDriverActivity.DriverSelectListener mDriverSelectListener;
+        private List<Driver> mDrivers;
+
+        public DriverSelectPagerAdapter(List<Driver> drivers,
+                SelectDriverActivity.DriverSelectListener driverSelectListener) {
+            mDrivers = drivers;
+            mDriverSelectListener = driverSelectListener;
+        }
+
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
 
@@ -109,13 +125,17 @@ public class UserDriversActivity extends BaseAppActivity implements UserDriversV
                     R.layout.item_driver_select, null);
             AppCompatButton selectButton = (AppCompatButton) itemView.findViewById(
                     R.id.item_driver_select_select_btn);
-            selectButton.setOnClickListener(UserDriversActivity.this);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+            AppCompatTextView driverNameTextView = (AppCompatTextView) itemView.findViewById(
+                    R.id.item_driver_select_driver_name);
+            AppCompatTextView driverMarkTextView = (AppCompatTextView) itemView.findViewById(
+                    R.id.item_driver_select_driver_mark);
+            Driver driver = mDrivers.get(position);
 
-                }
-            });
+            driverMarkTextView.setText(String.valueOf(driver.getMark()) + " лет");
+            driverNameTextView.setText(driver.getName());
+
+            selectButton.setOnClickListener(
+                    view -> mDriverSelectListener.DriverSelected(mDrivers.get(position)));
             container.addView(itemView);
             return itemView;
         }
@@ -127,12 +147,13 @@ public class UserDriversActivity extends BaseAppActivity implements UserDriversV
 
         @Override
         public int getCount() {
-            return 5;
+            return mDrivers.size();
         }
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
             return (view == object);
         }
+
     }
 }

@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.soberdriver.client.soberdriver.R;
-import com.soberdriver.client.soberdriver.mvp.models.Driver;
+import com.module.network.networkmodule.models.orders.Driver;
 
 import java.util.List;
 

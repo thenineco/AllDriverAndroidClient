@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.bignerdranch.expandablerecyclerview.Adapter.ExpandableRecyclerAdapter;
 import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
 import com.soberdriver.client.soberdriver.R;
+import com.module.network.networkmodule.models.orders.Driver;
 
 import java.util.List;
 
@@ -22,6 +23,8 @@ public class OrderDriversAdapter extends
     private final LayoutInflater mLayoutInflater;
     private OnItemClickListener mOnItemClickListener;
     private Context mContext;
+    private List<Driver> mDriverList;
+    private int orderCount = 0;
 
 
     /**
@@ -55,23 +58,27 @@ public class OrderDriversAdapter extends
         View view = mLayoutInflater.inflate(R.layout.expanable_view_container_layout,
                 childViewGroup,
                 false);
-        return new DriverChildViewHolder(view,mOnItemClickListener);
+        return new DriverChildViewHolder(view, mOnItemClickListener);
     }
 
     @Override
     public void onBindParentViewHolder(DriversParentViewHolder parentViewHolder, int position,
             ParentListItem parentListItem) {
-
+        System.out.println(orderCount);
+        parentViewHolder.bindViewGolder("Водитель " + (orderCount + 1));
+        orderCount++;
     }
 
     @Override
     public void onBindChildViewHolder(DriverChildViewHolder childViewHolder, int position,
             Object childListItem) {
-
     }
+
 
     public interface OnItemClickListener {
         void onItemClick(View v);
     }
+
+
 
 }

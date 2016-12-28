@@ -28,9 +28,8 @@ public class AddUserCarActivity extends BaseAppActivity implements AddUserCarVie
     SelectableEdithText mCarNumberEditText;
 
     public static Intent getIntent(final Context context) {
-        Intent intent = new Intent(context, AddUserCarActivity.class);
 
-        return intent;
+        return new Intent(context, AddUserCarActivity.class);
     }
 
 
@@ -44,5 +43,6 @@ public class AddUserCarActivity extends BaseAppActivity implements AddUserCarVie
     @OnClick(R.id.add_user_car_skip_text_view)
     public void onClick() {
         startActivity(MainOrderActivity.getIntent(this, true));
+        finish();
     }
 }

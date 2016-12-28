@@ -6,5 +6,7 @@ public interface NewOrderView extends MvpView {
 
     void setDriverCount();
 
+    void startDriverSelect();
+
     void openDriverFilter();
 }

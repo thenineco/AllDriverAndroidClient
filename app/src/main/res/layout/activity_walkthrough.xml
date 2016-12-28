@@ -45,17 +45,16 @@
     </LinearLayout>
 
     <FrameLayout
-        android:id="@+id/walkthrough_skip_btn"
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal|bottom">
 
         <android.support.v7.widget.AppCompatTextView
+            android:padding="10dp"
             android:id="@+id/walkthrough_skip_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|bottom"
-            android:layout_marginBottom="30dp"
             android:text="Пропустить"
             android:textColor="@color/colorBlack" />
     </FrameLayout>

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,9 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.module.network.networkmodule.TokenUtil;
+import com.module.network.networkmodule.models.Address;
+import com.module.network.networkmodule.models.orders.Order;
 import com.soberdriver.client.soberdriver.R;
 import com.soberdriver.client.soberdriver.presentation.presenter.NewOrderPresenter;
 import com.soberdriver.client.soberdriver.presentation.view.NewOrderView;
@@ -25,6 +29,8 @@ import com.soberdriver.client.soberdriver.ui.adapter.order.DriverItem;
 import com.soberdriver.client.soberdriver.ui.adapter.order.OrderDriversAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -36,13 +42,6 @@ public class NewOrderFragment extends BaseAppFragment implements NewOrderView,
 
     public static final String TAG = "NewOrderFragment";
 
-    @BindView(R.id.order_main_container)
-    FrameLayout mOrderMainContainer;
-    @BindView(R.id.order_drivers_recycler_view)
-    RecyclerView mDriversRecyclerView;
-    @BindView(R.id.order_select_driver_options_container)
-    LinearLayout mOrderSelectDriverOptionsContainer;
-
     private int mDriverCount = 1;
 
     public static final int START_LOCATION = 1;
@@ -51,6 +50,13 @@ public class NewOrderFragment extends BaseAppFragment implements NewOrderView,
 
     @InjectPresenter
     NewOrderPresenter mNewOrderPresenter;
+
+    @BindView(R.id.order_main_container)
+    FrameLayout mOrderMainContainer;
+    @BindView(R.id.order_drivers_recycler_view)
+    RecyclerView mDriversRecyclerView;
+    @BindView(R.id.order_select_driver_options_container)
+    LinearLayout mOrderSelectDriverOptionsContainer;
     @BindView(R.id.order_minus_btn)
     AppCompatImageView mOrderMinusBtn;
     @BindView(R.id.order_plus_btn)
@@ -75,12 +81,12 @@ public class NewOrderFragment extends BaseAppFragment implements NewOrderView,
     AppCompatTextView mOrderSelectDriverOptionsTextView;
     @BindView(R.id.order_create_order_btn)
     AppCompatButton mOrderCreateOrderBtn;
+    private boolean oneOrderForAllDrivers;
 
     private List<DriverItem> mDriverList = new ArrayList<>();
 
     public static NewOrderFragment newInstance() {
         NewOrderFragment fragment = new NewOrderFragment();
-
         Bundle args = new Bundle();
         fragment.setArguments(args);
 
@@ -99,6 +105,9 @@ public class NewOrderFragment extends BaseAppFragment implements NewOrderView,
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setStartParameters();
+        if (TokenUtil.getToken(getContext()).isEmpty()) {
+            mOrderCreateOrderBtn.setAlpha(.3f);
+        }
     }
 
 
@@ -120,40 +129,11 @@ public class NewOrderFragment extends BaseAppFragment implements NewOrderView,
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.order_minus_btn:
-                mDriverCount -= 1;
-                if (mDriverCount > 1) {
-                    mDriverList.remove(mDriverList.size() - 1);
-                    mDriversRecyclerView.setAdapter(
-                            new OrderDriversAdapter(getContext(), mDriverList, this));
-                    mOrderMinusBtn.setAlpha(1f);
-                } else {
-                    mDriversRecyclerView.setVisibility(View.GONE);
-                    mDriverList.clear();
-                    mOrderSelectDriverOptionsContainer.setVisibility(View.VISIBLE);
-                    mOrderMinusBtn.setAlpha(.5f);
-                    mDriverCount = 1;
-                }
+                removeDriverFromOrder();
                 setDriverCount();
                 break;
             case R.id.order_plus_btn:
-                mDriverCount += 1;
-                if (mDriverCount > 1) {
-                    if (mDriversRecyclerView.getVisibility() == View.GONE) {
-                        mDriversRecyclerView.setVisibility(View.VISIBLE);
-                        mOrderSelectDriverOptionsContainer.setVisibility(View.GONE);
-                    }
-                    if (mDriverList.size()==0){
-                        mDriverList.add(new DriverItem());
-                        mDriverList.add(new DriverItem());
-                    }else {
-                        mDriverList.add(new DriverItem());
-                    }
-                    mDriversRecyclerView.setAdapter(
-                            new OrderDriversAdapter(getContext(), mDriverList, this));
-                    mOrderMinusBtn.setAlpha(1f);
-                } else {
-                    mOrderMinusBtn.setAlpha(.5f);
-                }
+                addDriverToOrder();
                 setDriverCount();
                 break;
             case R.id.order_location_btn:
@@ -165,7 +145,9 @@ public class NewOrderFragment extends BaseAppFragment implements NewOrderView,
             case R.id.order_fast_order_btn:
                 break;
             case R.id.order_create_order_btn:
-                startDriverSelect();
+                List<Order> orderList = new ArrayList<>();
+                orderList.add(new Order(new Address(), new Date()));
+                mNewOrderPresenter.createOrder(orderList);
                 break;
             case R.id.order_select_driver_options_text_view:
                 openDriverFilter();
@@ -173,8 +155,68 @@ public class NewOrderFragment extends BaseAppFragment implements NewOrderView,
         }
     }
 
-    private void startDriverSelect() {
-        startActivity(SelectDriverActivity.getIntent(getContext()));
+    private void removeDriverFromOrder() {
+        if (mDriverCount > 2) {
+            mDriverCount--;
+            mDriverList.remove(mDriverList.size() - 1);
+            mDriversRecyclerView.setAdapter(
+                    new OrderDriversAdapter(getContext(), mDriverList, this));
+            mOrderMinusBtn.setAlpha(1f);
+            mDriversRecyclerView.postDelayed(() -> {
+                OrderDriversAdapter orderDriversAdapter =
+                        (OrderDriversAdapter) mDriversRecyclerView.getAdapter();
+                orderDriversAdapter.expandParent(0);
+            }, 100);
+
+        } else {
+            mDriversRecyclerView.setVisibility(View.GONE);
+            mDriverList.clear();
+            mOrderSelectDriverOptionsContainer.setVisibility(View.VISIBLE);
+            mOrderMinusBtn.setAlpha(.5f);
+            mDriverCount = 1;
+        }
+        if (mDriverCount < 3) {
+            mOrderPlusBtn.setAlpha(1.f);
+        }
+    }
+
+    private void addDriverToOrder() {
+        if (mDriverCount < 3) {
+            mDriverCount++;
+            if (mDriverCount > 1) {
+                if (mDriversRecyclerView.getVisibility() == View.GONE) {
+                    mDriversRecyclerView.setVisibility(View.VISIBLE);
+                    mOrderSelectDriverOptionsContainer.setVisibility(View.GONE);
+                }
+                if (mDriverList.size() == 0) {
+                    mDriverList.add(new DriverItem());
+                    mDriverList.add(new DriverItem());
+                } else {
+                    mDriverList.add(new DriverItem());
+                }
+                mDriversRecyclerView.setAdapter(
+                        new OrderDriversAdapter(getContext(), mDriverList, this));
+                mOrderMinusBtn.setAlpha(1f);
+                mDriversRecyclerView.postDelayed(() -> {
+                    OrderDriversAdapter orderDriversAdapter =
+                            (OrderDriversAdapter) mDriversRecyclerView.getAdapter();
+                    orderDriversAdapter.expandParent(0);
+                }, 100);
+
+            } else {
+                mOrderMinusBtn.setAlpha(.5f);
+            }
+        }
+        if (mDriverCount == 3) {
+            mOrderPlusBtn.setAlpha(.5f);
+        }
+    }
+
+    @Override
+    public void startDriverSelect() {
+        if (!TokenUtil.getToken(getContext()).isEmpty()) {
+            startActivity(SelectDriverActivity.getIntent(getContext(), mDriverCount));
+        }
     }
 
     @Override
@@ -206,6 +248,12 @@ public class NewOrderFragment extends BaseAppFragment implements NewOrderView,
         switch (v.getId()) {
             case R.id.order_select_start_location_btn:
                 startSelectLocationActivity(START_LOCATION);
+                break;
+            case R.id.order_driver_details_btn:
+                openDriverFilter();
+                break;
+            case R.id.order_for_all_orders_check_box:
+                oneOrderForAllDrivers = ((AppCompatCheckBox) v).isChecked();
                 break;
         }
     }

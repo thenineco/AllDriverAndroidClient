@@ -7,7 +7,6 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.SwitchCompat;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ScrollView;
@@ -25,8 +24,10 @@ import butterknife.Unbinder;
 
 public class DriverFilterActivity extends BaseAppActivity implements DriverFilterView {
     public static final String TAG = "DriverFilterActivity";
+
     @InjectPresenter
     DriverFilterPresenter mPresenter;
+
     @BindView(R.id.driver_filter_close_btn)
     AppCompatImageView mCloseBtn;
     @BindView(R.id.driver_filter_a_category_btn)
@@ -88,13 +89,10 @@ public class DriverFilterActivity extends BaseAppActivity implements DriverFilte
 
 
     void attachKeyboardListeners() {
-        mCommentForDriverEditText.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                mCommentForDriverEditText.setFocusable(true);
-                mCommentForDriverEditText.setFocusableInTouchMode(true);
-                return false;
-            }
+        mCommentForDriverEditText.setOnTouchListener((view, motionEvent) -> {
+            mCommentForDriverEditText.setFocusable(true);
+            mCommentForDriverEditText.setFocusableInTouchMode(true);
+            return false;
         });
         if (keyboardListenersAttached) {
             return;

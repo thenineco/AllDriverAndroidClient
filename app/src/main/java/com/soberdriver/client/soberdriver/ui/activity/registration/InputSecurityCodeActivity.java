@@ -13,7 +13,6 @@ import com.soberdriver.client.soberdriver.R;
 import com.soberdriver.client.soberdriver.presentation.presenter.InputSecurityCodePresenter;
 import com.soberdriver.client.soberdriver.presentation.view.InputSecurityCodeView;
 import com.soberdriver.client.soberdriver.ui.activity.BaseAppActivity;
-import com.soberdriver.client.soberdriver.ui.activity.MainOrderActivity;
 import com.soberdriver.client.soberdriver.ui.view.SelectableEdithText;
 import com.soberdriver.client.soberdriver.ui.view.SelectablePhoneEditText;
 import com.soberdriver.client.soberdriver.utils.DisplayUtil;
@@ -105,7 +104,6 @@ public class InputSecurityCodeActivity extends BaseAppActivity implements InputS
 
     @OnClick(R.id.input_security_code_send_code_btn)
     public void onClick() {
-
         startActivity(AddUserCarActivity.getIntent(this));
     }
 }

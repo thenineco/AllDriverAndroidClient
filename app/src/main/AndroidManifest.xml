@@ -1,74 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.soberdriver.client.soberdriver">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.soberdriver.client.soberdriver">
+
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
+        android:name=".SoberDriverApp"
         android:allowBackup="true"
         android:icon="@mipmap/launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" tools:replace="android:name">
         <activity
-            android:name=".ui.activity.WalkthroughActivity"
+            android:name=".ui.activity.registration.WalcthroughActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.activity.registration.InputSecurityCodeActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"/>
 
         <activity
             android:name=".ui.activity.registration.InputPhoneNumberActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"/>
+
+        <activity
+            android:name=".ui.activity.DriverInRoadActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"/>
+
+        <activity
+            android:name=".ui.activity.FinishOrderActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"/>
+
 
         <activity
             android:name=".ui.activity.MainOrderActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.SelectLocationActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.SelectDriverActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".ui.activity.StartOrderActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".ui.activity.DriverProfileActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.DriverFilterActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.AddNewCardActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.PaymentActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.UserProfileActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.PromoActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.registration.AddUserCarActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".ui.fragment.UserHistoryActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.UserDriversActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

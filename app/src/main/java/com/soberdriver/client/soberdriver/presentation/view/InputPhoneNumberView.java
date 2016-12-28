@@ -13,4 +13,6 @@ public interface InputPhoneNumberView extends MvpView {
     void showSendPhoneNumberBtn();
 
     void startEnterSecurity(User user);
+
+    void startAddUserCarActivity();
 }

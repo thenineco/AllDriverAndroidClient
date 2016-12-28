@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/input_phone_number_scroll_view"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:orientation="vertical">
 
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
         <LinearLayout
             android:id="@+id/input_phone_number_input_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <include layout="@layout/app_toolbar" />
-
+            <include layout="@layout/app_toolbar"/>
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/input_phone_number_info_text_view"
@@ -28,7 +27,7 @@
                 android:layout_marginTop="30dp"
                 android:gravity="center"
                 android:text="Чтобы вызвать водителя вам необходимо авторизоваться"
-                android:textSize="20sp" />
+                android:textSize="20sp"/>
 
             <com.soberdriver.client.soberdriver.ui.view.SelectableEdithText
                 android:id="@+id/input_phone_number_user_name_edit_text"
@@ -38,12 +37,13 @@
                 android:layout_marginRight="50dp"
                 android:layout_marginTop="30dp"
                 android:background="@null"
+                android:focusable="false"
                 android:gravity="center"
                 android:hint="Имя пользователя"
                 android:inputType="textCapWords"
                 android:textColor="@color/registration.user.name_color"
                 android:textCursorDrawable="@drawable/cursor_black"
-                android:textSize="20sp" />
+                android:textSize="20sp"/>
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -51,7 +51,7 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/colorMaterialGray400" />
+                android:background="@color/colorMaterialGray400"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:text="+7"
                     android:textColor="@color/colorBlack"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"/>
 
                 <com.soberdriver.client.soberdriver.ui.view.SelectablePhoneEditText
                     android:id="@+id/input_phone_number_user_phone_number_edit_text"
@@ -76,14 +76,15 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="10dp"
                     android:background="@null"
+                    android:focusable="false"
                     android:focusableInTouchMode="true"
                     android:gravity="center"
                     android:hint="Ваш номер телефона"
                     android:inputType="phone"
-                    android:maxLength="14"
+                    android:maxLength="13"
                     android:textColor="@color/registration.user.phone_number_color"
                     android:textCursorDrawable="@drawable/cursor_black"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"/>
             </LinearLayout>
 
             <FrameLayout
@@ -92,17 +93,62 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/colorMaterialGray400" />
+                android:background="@color/colorMaterialGray400"/>
 
+            <LinearLayout
+                android:id="@+id/input_phone_number_pin_code_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <com.soberdriver.client.soberdriver.ui.view.SelectableEdithText
+                    android:id="@+id/input_phone_number_pin_code_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="Введите код"
+                    android:inputType="phone"
+                    android:maxLength="4"
+                    android:textColor="@color/registration.user.name_color"
+                    android:textCursorDrawable="@drawable/cursor_black"
+                    android:textSize="20sp"/>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorMaterialGray400"/>
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="40dp">
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/input_phone_number_send_user_data_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Получить код по смс"
+                    android:visibility="gone"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/input_phone_number_skip_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="10dp"
+                    android:text="Пропустить"
+                    android:textColor="@color/colorBlack"
+                />
+            </FrameLayout>
         </LinearLayout>
-    </FrameLayout>
-
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/input_phone_number_send_user_data_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:text="Получить код по смс" />
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

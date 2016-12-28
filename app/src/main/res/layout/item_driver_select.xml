@@ -1,18 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorMaterialGray400">
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/colorMaterialGray400">
+
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center"
+                  android:layout_marginBottom="50dp"
+                  android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:text="Водитель"
+            android:textSize="15sp"/>
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/item_driver_select_driver_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:textSize="15sp"/>
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="Стаж"
+            android:textSize="15sp"/>
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/item_driver_select_driver_mark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:textSize="15sp"/>
+    </LinearLayout>
 
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="70dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:gravity="center"
-        android:text="Информация о водителе, ФИО, Фото, стаж и т.д. ..."
-        android:textSize="20dp" />
+        android:text="может приехать через 10 сек"
+        android:textColor="@color/registration.user.phone_number_color"
+        android:textSize="15sp"/>
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/item_driver_select_select_btn"
@@ -20,5 +69,5 @@
         android:layout_height="60dp"
         android:layout_gravity="bottom"
         android:background="@color/colorPrimary"
-        android:text="Выбрать" />
+        android:text="Выбрать"/>
 </FrameLayout>

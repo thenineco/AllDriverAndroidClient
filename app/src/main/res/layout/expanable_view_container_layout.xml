@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
-    android:orientation="vertical">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="20dp"
+              android:layout_marginRight="20dp"
+              android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/order_select_start_location_btn"
@@ -22,20 +22,20 @@
             android:layout_weight="1"
             android:text="Откуда вас забрать?"
             android:textColor="@color/colorBlack"
-            android:textSize="15sp" />
+            android:textSize="15sp"/>
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/order_location_btn"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            app:srcCompat="@drawable/map_marker" />
+            app:srcCompat="@drawable/map_marker"/>
     </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
-        android:background="@color/colorBlack" />
+        android:background="@color/colorBlack"/>
 
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="match_parent"
@@ -45,7 +45,7 @@
         android:layout_weight="1"
         android:text="Когда"
         android:textColor="@color/colorBlack"
-        android:textSize="13sp" />
+        android:textSize="13sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,22 +60,23 @@
             android:layout_weight="1"
             android:text="Как можно скорее"
             android:textColor="@color/colorBlack"
-            android:textSize="15dp" />
+            android:textSize="15dp"/>
 
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            app:srcCompat="@drawable/chevron_down" />
+            app:srcCompat="@drawable/chevron_down"/>
     </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
-        android:background="@color/colorBlack" />
+        android:background="@color/colorBlack"/>
 
 
     <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/order_driver_details_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
@@ -83,13 +84,13 @@
         android:layout_weight="1"
         android:text="Уточнить детали по водителю"
         android:textColor="@color/colorBlack"
-        android:textSize="15sp" />
+        android:textSize="15sp"/>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="5dp"
-        android:background="@color/colorBlack" />
+        android:background="@color/colorBlack"/>
 
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="match_parent"
@@ -99,9 +100,10 @@
         android:layout_weight="1"
         android:text="Телефон заказчика для связи"
         android:textColor="@color/colorBlack"
-        android:textSize="10sp" />
+        android:textSize="10sp"/>
 
-    <com.soberdriver.client.soberdriver.ui.view.SelectableEdithText
+    <com.soberdriver.client.soberdriver.ui.view.SelectablePhoneEditText
+        android:id="@+id/order_client_phone_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
@@ -110,13 +112,13 @@
         android:hint="+7 999 99 99 99"
         android:inputType="phone"
         android:textColor="@color/colorBlack"
-        android:textSize="15sp" />
+        android:textSize="15sp"/>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="5dp"
-        android:background="@color/colorBlack" />
+        android:background="@color/colorBlack"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -125,10 +127,11 @@
         android:orientation="horizontal">
 
 
-        <CheckBox
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/order_for_all_orders_check_box"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            app:srcCompat="@drawable/map_marker" />
+            app:srcCompat="@drawable/map_marker"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="match_parent"
@@ -139,7 +142,7 @@
             android:gravity=""
             android:text="Применить ко всем водителям"
             android:textColor="@color/colorBlack"
-            android:textSize="15dp" />
+            android:textSize="15dp"/>
     </LinearLayout>
 
 

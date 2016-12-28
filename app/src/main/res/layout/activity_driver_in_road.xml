@@ -1,0 +1,105 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/start_order_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/order_start_info_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:text="Водитель в пути"
+                android:textColor="@color/colorBlack"
+                android:textSize="25sp"/>
+
+            <include layout="@layout/driver_profile_item"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="100dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatButton
+                            android:id="@+id/start_order_call_to_driver_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:background="@color/colorPrimary"
+                            android:text="позвонить"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorWhite"/>
+
+                        <android.support.v7.widget.AppCompatButton
+                            android:id="@+id/start_order_cancel_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:background="@color/colorPrimary"
+                            android:text="отменить"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorWhite"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="bottom"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/layout_border"
+                        android:orientation="vertical">
+                        <android.support.v7.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Свяжитесь с водителем если что то нужно, например купить воды."/>
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/colorMaterialGray400"/>
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/start_order_more_info_edit_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:layout_marginLeft="20dp"
+                            android:background="@null"
+                            android:focusable="false"
+                            android:hint="Введите текст..."
+                            android:inputType="textCapSentences"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+</ScrollView>

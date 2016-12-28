@@ -5,6 +5,7 @@ import android.graphics.Rect;
 import android.support.v7.widget.AppCompatEditText;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 
 /**
  * Created by zest .
@@ -13,10 +14,10 @@ import android.util.AttributeSet;
 public class SelectablePhoneEditText extends AppCompatEditText {
 
     private CharSequence hint;
+    private TextViewStateChangesCallback mTextViewStateChangesCallback;
 
     public SelectablePhoneEditText(Context context) {
         super(context);
-
         initView();
     }
 
@@ -32,13 +33,25 @@ public class SelectablePhoneEditText extends AppCompatEditText {
     }
 
     private void initView() {
-        addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+        addTextChangedListener(new PhoneNumberFormattingTextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                super.onTextChanged(s, start, before, count);
+                if (mTextViewStateChangesCallback != null) {
+                    mTextViewStateChangesCallback.textChanged(getText().toString());
+                }
+            }
+        });
         hint = getHint();
     }
+
 
     @Override
     protected void onFocusChanged(boolean focused, int direction, Rect previouslyFocusedRect) {
         super.onFocusChanged(focused, direction, previouslyFocusedRect);
+        if (mTextViewStateChangesCallback != null) {
+            mTextViewStateChangesCallback.viewFocused(focused);
+        }
 
         if (focused || !getText().toString().isEmpty()) {
             this.setHint(" ");
@@ -48,7 +61,28 @@ public class SelectablePhoneEditText extends AppCompatEditText {
     }
 
     @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (!isFocusable()){
+            setFocusable(true);
+            setFocusableInTouchMode(true);
+            requestFocus();
+        }
+        return super.onTouchEvent(event);
+    }
+
+    @Override
     public boolean hasOverlappingRendering() {
         return false;
+    }
+
+    public void setTextViewStateChangesCallback(
+            TextViewStateChangesCallback textViewStateChangesCallback) {
+        mTextViewStateChangesCallback = textViewStateChangesCallback;
+    }
+
+    public interface TextViewStateChangesCallback {
+        void viewFocused(boolean focus);
+
+        void textChanged(String text);
     }
 }

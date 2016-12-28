@@ -122,19 +122,16 @@ public class MainOrderActivity extends BaseAppActivity implements MainOrderView 
         materialMenu = new MaterialMenuDrawable(this, Color.WHITE,
                 MaterialMenuDrawable.Stroke.THIN);
         toolbar.setNavigationIcon(materialMenu);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (menuIsOpen) {
-                    materialMenu.animateIconState(MaterialMenuDrawable.IconState.ARROW);
-                    mMainDrawerLayout.closeDrawers();
-                } else {
-                    materialMenu.animateIconState(MaterialMenuDrawable.IconState.BURGER);
-                    mMainDrawerLayout.openDrawer(Gravity.LEFT);
-                }
-                // random state
-
+        toolbar.setNavigationOnClickListener(v -> {
+            if (menuIsOpen) {
+                materialMenu.animateIconState(MaterialMenuDrawable.IconState.ARROW);
+                mMainDrawerLayout.closeDrawers();
+            } else {
+                materialMenu.animateIconState(MaterialMenuDrawable.IconState.BURGER);
+                mMainDrawerLayout.openDrawer(Gravity.LEFT);
             }
+            // random state
+
         });
     }
 

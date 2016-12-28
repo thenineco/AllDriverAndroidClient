@@ -14,18 +14,26 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.module.network.networkmodule.models.orders.Driver;
 import com.soberdriver.client.soberdriver.R;
 import com.soberdriver.client.soberdriver.presentation.presenter.StartOrderPresenter;
 import com.soberdriver.client.soberdriver.presentation.view.StartOrderView;
 import com.soberdriver.client.soberdriver.utils.DisplayUtil;
 
+import java.util.concurrent.TimeUnit;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 public class StartOrderActivity extends BaseAppActivity implements StartOrderView {
     public static final String TAG = "StartOrderActivity";
+    public static final String DRIVER = "driver";
     @InjectPresenter
     StartOrderPresenter mStartOrderPresenter;
     @BindView(R.id.driver_profile_item_avatar_image_view)
@@ -53,10 +61,11 @@ public class StartOrderActivity extends BaseAppActivity implements StartOrderVie
     @BindView(R.id.start_order_scroll_view)
     ScrollView mScrollView;
     private boolean keyboardListenersAttached;
+    private CompositeSubscription mCompositeSubscription;
 
-    public static Intent getIntent(final Context context) {
+    public static Intent getIntent(final Context context, Driver driver) {
         Intent intent = new Intent(context, StartOrderActivity.class);
-
+        intent.putExtra(DRIVER, driver);
         return intent;
     }
 
@@ -67,6 +76,13 @@ public class StartOrderActivity extends BaseAppActivity implements StartOrderVie
         setContentView(R.layout.activity_start_order);
         ButterKnife.bind(this);
         attachTextInputListeners();
+        Driver driver = (Driver) getIntent().getExtras().getSerializable(DRIVER);
+        if (driver != null) {
+            mDriverNameTextView.setText(driver.getName());
+            mDriverInfoTextView.setText(
+                    "стаж " + String.valueOf(driver.getMark()) + " лет");
+        }
+
     }
 
     private ViewTreeObserver.OnGlobalLayoutListener keyboardLayoutListener =
@@ -80,13 +96,10 @@ public class StartOrderActivity extends BaseAppActivity implements StartOrderVie
 
 
     void attachTextInputListeners() {
-        mMoreInfoEditText.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                mMoreInfoEditText.setFocusable(true);
-                mMoreInfoEditText.setFocusableInTouchMode(true);
-                return false;
-            }
+        mMoreInfoEditText.setOnTouchListener((view, motionEvent) -> {
+            mMoreInfoEditText.setFocusable(true);
+            mMoreInfoEditText.setFocusableInTouchMode(true);
+            return false;
         });
         if (keyboardListenersAttached) {
             return;
@@ -103,6 +116,38 @@ public class StartOrderActivity extends BaseAppActivity implements StartOrderVie
         if (keyboardListenersAttached) {
             mScrollView.getViewTreeObserver().removeOnGlobalLayoutListener(keyboardLayoutListener);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mCompositeSubscription == null) {
+            mCompositeSubscription = new CompositeSubscription();
+        }
+        mCompositeSubscription.add(
+                Observable.interval(1, TimeUnit.SECONDS)
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(aLong -> {
+                            if (aLong < 10) {
+                                mTimerTextView.setText("00:0" + aLong);
+                            } else if (aLong == 10) {
+                                stopOrder();
+                                mCompositeSubscription.unsubscribe();
+                            }
+                        }, Throwable::printStackTrace)
+        );
+    }
+
+    private void stopOrder() {
+        startActivity(FinishOrderActivity.getIntent(this));
+        finish();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mCompositeSubscription.unsubscribe();
     }
 
 
