@@ -3,7 +3,7 @@ package com.soberdriver.client.soberdriver.presentation.view;
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
-import com.soberdriver.client.soberdriver.mvp.models.User;
+import com.module.network.networkmodule.models.User;
 
 /**
  * Created by zest .
@@ -12,7 +12,7 @@ import com.soberdriver.client.soberdriver.mvp.models.User;
 public interface InputPhoneNumberView extends MvpView {
     void showSendPhoneNumberBtn();
 
-    void startEnterSecurity(User user);
+    void startEnterSecurityCod(User user);
 
     void startAddUserCarActivity();
 }

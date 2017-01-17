@@ -1,4 +1,4 @@
-package com.module.network.networkmodule.models;
+package com.module.network.networkmodule.models.address;
 
 import java.util.ArrayList;
 
@@ -8,14 +8,18 @@ import java.util.ArrayList;
 public class Address {
     private ArrayList<Float> center = new ArrayList<>();
     private String name;
+    private float latitude;
+    private float longitude;
 
     public Address(ArrayList<Float> center) {
         this.center = center;
     }
 
     public Address() {
-        center.add(33.56546f);
-        center.add(35.65657f);
+        latitude = 33.56546f;
+        longitude = 35.65657f;
+        center.add(latitude);
+        center.add(longitude);
     }
 
     public ArrayList<Float> getCenter() {
@@ -36,5 +40,13 @@ public class Address {
 
     public void addCenter(float center) {
         this.center.add(center);
+    }
+
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public float getLongitude() {
+        return longitude;
     }
 }

@@ -1,4 +1,4 @@
-package com.module.network.networkmodule.models.orders;
+package com.module.network.networkmodule.models.driver;
 
 import com.module.network.networkmodule.models.Categories;
 

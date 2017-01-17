@@ -1,7 +1,7 @@
-package com.module.network.networkmodule.models.orders;
+package com.module.network.networkmodule.models.driver;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.module.network.networkmodule.models.Categories;
 
 import java.io.Serializable;
 
@@ -12,42 +12,103 @@ import java.io.Serializable;
 public class Driver implements Serializable {
 
     @SerializedName("_id")
-    @Expose
-    private String id;
+    private String driverId;
+
+    @SerializedName("categories")
+    private Categories mCategories = new Categories();
+
     @SerializedName("phone")
-    @Expose
     private String phone;
+
     @SerializedName("name")
-    @Expose
     private String name;
+
     @SerializedName("mark")
-    @Expose
     private Integer mark;
+
     @SerializedName("gender")
-    @Expose
     private Boolean gender;
+
     @SerializedName("internationalLicence")
-    @Expose
     private Boolean internationalLicence;
+
     @SerializedName("isOfficial")
-    @Expose
     private Boolean isOfficial;
+
     @SerializedName("isSmoking")
-    @Expose
     private Boolean isSmoking;
+
     @SerializedName("isSessionOpened")
-    @Expose
     private Boolean isSessionOpened;
-    @SerializedName("__v")
-    @Expose
-    private Integer v;
+
+    @SerializedName("appearance")
+    private String appearance;
+
+    @SerializedName("msg")
+    private Driver mDriver;
+
+    public Driver getDriver() {
+        return mDriver;
+    }
+
+    public void setDriver(Driver driver) {
+        mDriver = driver;
+    }
+
+    public String getDriverId() {
+        return driverId;
+    }
+
+    public void setDriverId(String driverId) {
+        this.driverId = driverId;
+    }
+
+    public String getAppearance() {
+        return appearance;
+    }
+
+    public void setAppearance(String appearance) {
+        this.appearance = appearance;
+    }
 
     public String getId() {
-        return id;
+        return driverId;
+    }
+
+    public Categories getCategories() {
+        return mCategories;
+    }
+
+    public void setCategories(Categories categories) {
+        mCategories = categories;
+    }
+
+    public Boolean getOfficial() {
+        return isOfficial;
+    }
+
+    public void setOfficial(Boolean official) {
+        isOfficial = official;
+    }
+
+    public Boolean getSmoking() {
+        return isSmoking;
+    }
+
+    public void setSmoking(Boolean smoking) {
+        isSmoking = smoking;
+    }
+
+    public Boolean getSessionOpened() {
+        return isSessionOpened;
+    }
+
+    public void setSessionOpened(Boolean sessionOpened) {
+        isSessionOpened = sessionOpened;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.driverId = id;
     }
 
     public String getPhone() {
@@ -114,12 +175,5 @@ public class Driver implements Serializable {
         this.isSessionOpened = isSessionOpened;
     }
 
-    public Integer getV() {
-        return v;
-    }
-
-    public void setV(Integer v) {
-        this.v = v;
-    }
 
 }

@@ -12,10 +12,11 @@ import android.view.ViewTreeObserver;
 import android.widget.ScrollView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.module.network.networkmodule.models.orders.Driver;
+import com.module.network.networkmodule.models.driver.Driver;
 import com.soberdriver.client.soberdriver.R;
 import com.soberdriver.client.soberdriver.presentation.presenter.DriverInRoadPresenter;
 import com.soberdriver.client.soberdriver.presentation.view.DriverInRoadView;
+import com.soberdriver.client.soberdriver.ui.activity.order.StartOrderActivity;
 import com.soberdriver.client.soberdriver.utils.DisplayUtil;
 
 import java.util.concurrent.TimeUnit;

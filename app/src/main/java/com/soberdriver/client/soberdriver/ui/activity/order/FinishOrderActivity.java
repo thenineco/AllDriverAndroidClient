@@ -1,4 +1,4 @@
-package com.soberdriver.client.soberdriver.ui.activity;
+package com.soberdriver.client.soberdriver.ui.activity.order;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import com.soberdriver.client.soberdriver.presentation.presenter.FinishOrderPres
 
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.soberdriver.client.soberdriver.ui.activity.BaseAppActivity;
 
 public class FinishOrderActivity extends BaseAppActivity implements FinishOrderView {
     public static final String TAG = "FinishOrderActivity";

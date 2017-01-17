@@ -1,7 +1,7 @@
 package com.soberdriver.client.soberdriver.presentation.view;
 
 import com.arellomobile.mvp.MvpView;
-import com.module.network.networkmodule.models.orders.Driver;
+import com.module.network.networkmodule.models.driver.Driver;
 
 import java.util.List;
 

@@ -1,8 +1,7 @@
 package com.module.network.networkmodule.api_v1;
 
 import com.module.network.networkmodule.models.AuthKey;
-import com.module.network.networkmodule.models.orders.DriverDetails;
-import com.module.network.networkmodule.models.orders.Order;
+import com.module.network.networkmodule.models.driver.DriverDetails;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,17 +33,25 @@ public class HttpRequests {
     }
 
     interface Drivers {
-        //        @GET("/driver-preferences")
-//        Observable<List<DriverDetails>> getDriversWithUserPreference(
-//                @QueryMap HashMap<String, Object> queryMap);
-//
-        @GET("/users/preferences/drivers")
-        Observable<List<DriverDetails>> getDriversWithUserPreference(
+        @POST("/drivers")
+        Observable<ResponseBody> createNewDriver(@Body HashMap<String, Object> queryMap);
+
+        @GET("/drivers/{driverId}")
+        Observable<ResponseBody> getDriverById(@Path("driverId") String orderId,
                 @QueryMap HashMap<String, Object> queryMap);
 
-        @POST("/users/preferences/drivers")
-        Observable<ResponseBody> addUserLikeToDrivers(@Body HashMap<String, Object> queryMap);
+        @PATCH("/drivers/sessions/open")
+        Observable<ResponseBody> openDriverSession(@Body HashMap<String, Object> queryMap);
 
+        @PATCH("/drivers/sessions/close")
+        Observable<ResponseBody> closeDriverSession(@Body HashMap<String, Object> queryMap);
+
+        @GET("/drivers/preferences/users")
+        Observable<ResponseBody> getDriversLikeToUser(
+                @QueryMap HashMap<String, Object> queryMap);
+
+        @POST("/drivers/preferences/users")
+        Observable<ResponseBody> addDriversLikeToUser(@Body HashMap<String, Object> queryMap);
     }
 
     interface Addresses {
@@ -60,13 +67,20 @@ public class HttpRequests {
         Observable<ResponseBody> getUser(@QueryMap HashMap<String, Object> queryMap);
 
         @POST("/users")
-        Observable<ResponseBody> addNewUser(@Body HashMap<String, Object> queryMap);
+        Observable<ResponseBody> createNewUser(@Body HashMap<String, Object> queryMap);
 
         @PATCH("/users")
         Observable<ResponseBody> editUser(@Body HashMap<String, Object> queryMap);
 
         @GET("/users/all")
         Observable<ResponseBody> getAllUsers(@QueryMap HashMap<String, Object> queryMap);
+
+        @GET("/users/preferences/drivers")
+        Observable<ResponseBody> getUserLikeToDrivers(
+                @QueryMap HashMap<String, Object> queryMap);
+
+        @POST("/users/preferences/drivers")
+        Observable<ResponseBody> addUserLikeToDrivers(@Body HashMap<String, Object> queryMap);
 
     }
 
@@ -93,6 +107,12 @@ public class HttpRequests {
 
         @PATCH("/orders/drivers")
         Observable<ResponseBody> callDriversForDriver(@Body HashMap<String, Object> queryMap);
+
+        @GET("/orders/active")
+        Observable<ResponseBody> getActiveOrders(@QueryMap HashMap<String, Object> queryMap);
+
+        @GET("/orders/route/price")
+        Observable<ResponseBody> getOrderPrice(@QueryMap HashMap<String, Object> queryMap);
     }
 
 //    interface TokenRequests {

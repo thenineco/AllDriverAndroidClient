@@ -1,6 +1,7 @@
-package com.module.network.networkmodule.models.orders;
+package com.module.network.networkmodule.response_objects;
 
 import com.google.gson.annotations.SerializedName;
+import com.module.network.networkmodule.models.driver.Driver;
 
 
 import java.util.List;

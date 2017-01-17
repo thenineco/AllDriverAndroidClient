@@ -3,10 +3,8 @@ package com.soberdriver.client.soberdriver.ui.adapter.drivers;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
-import com.module.network.networkmodule.models.orders.Driver;
+import com.module.network.networkmodule.models.driver.Driver;
 import com.soberdriver.client.soberdriver.R;
 import com.soberdriver.client.soberdriver.ui.activity.SelectDriverActivity;
 

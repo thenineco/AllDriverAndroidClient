@@ -2,6 +2,9 @@ package com.module.network.networkmodule;
 
 import android.content.Context;
 
+import com.module.network.networkmodule.utils.PhoneUtil;
+import com.module.network.networkmodule.utils.UserTokenUtil;
+
 import java.util.HashMap;
 
 /**
@@ -21,11 +24,12 @@ public class RequestBodyCreator {
         addAuthDataToRequestBody(context);
     }
 
+
+
     private void addAuthDataToRequestBody(Context context) {
         requestsMap.put("phone", PhoneUtil.getPhone(context));
-        requestsMap.put("authKey", TokenUtil.getToken(context));
+        requestsMap.put("authKey", UserTokenUtil.getToken(context));
     }
-
 
     public RequestBodyCreator addParam(String paramName, Object paramValue) {
         requestsMap.put(paramName, paramValue);

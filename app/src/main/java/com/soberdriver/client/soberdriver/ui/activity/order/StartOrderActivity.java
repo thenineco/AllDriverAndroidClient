@@ -1,4 +1,4 @@
-package com.soberdriver.client.soberdriver.ui.activity;
+package com.soberdriver.client.soberdriver.ui.activity.order;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,17 +7,18 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.module.network.networkmodule.models.orders.Driver;
+import com.module.network.networkmodule.models.driver.Driver;
 import com.soberdriver.client.soberdriver.R;
 import com.soberdriver.client.soberdriver.presentation.presenter.StartOrderPresenter;
 import com.soberdriver.client.soberdriver.presentation.view.StartOrderView;
+import com.soberdriver.client.soberdriver.ui.activity.BaseAppActivity;
+import com.soberdriver.client.soberdriver.ui.activity.DriverProfileActivity;
 import com.soberdriver.client.soberdriver.utils.DisplayUtil;
 
 import java.util.concurrent.TimeUnit;

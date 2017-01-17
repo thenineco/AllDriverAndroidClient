@@ -9,7 +9,7 @@ import com.soberdriver.client.soberdriver.R;
 import com.soberdriver.client.soberdriver.presentation.presenter.AddUserCarPresenter;
 import com.soberdriver.client.soberdriver.presentation.view.AddUserCarView;
 import com.soberdriver.client.soberdriver.ui.activity.BaseAppActivity;
-import com.soberdriver.client.soberdriver.ui.activity.MainOrderActivity;
+import com.soberdriver.client.soberdriver.ui.activity.order.MainOrderActivity;
 import com.soberdriver.client.soberdriver.ui.view.SelectableEdithText;
 
 import butterknife.BindView;

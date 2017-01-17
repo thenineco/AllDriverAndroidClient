@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class ResponseObject<T> {
     @SerializedName("msg")
-    private ResponseMessage<T> mResponseMessage;
+    private ResponseMessage mResponseMessage;
 
     public ResponseMessage getResponseMessage() {
         return mResponseMessage;

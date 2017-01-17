@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.soberdriver.client.soberdriver.R;
-import com.module.network.networkmodule.models.orders.Driver;
+import com.module.network.networkmodule.models.driver.Driver;
 import com.soberdriver.client.soberdriver.presentation.presenter.UserHistoryPresenter;
 import com.soberdriver.client.soberdriver.presentation.view.UserHistoryView;
 import com.soberdriver.client.soberdriver.ui.activity.BaseAppActivity;

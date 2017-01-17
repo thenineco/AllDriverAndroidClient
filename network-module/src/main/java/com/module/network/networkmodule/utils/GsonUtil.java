@@ -1,4 +1,4 @@
-package com.soberdriver.client.soberdriver.utils;
+package com.module.network.networkmodule.utils;
 
 import android.support.annotation.NonNull;
 

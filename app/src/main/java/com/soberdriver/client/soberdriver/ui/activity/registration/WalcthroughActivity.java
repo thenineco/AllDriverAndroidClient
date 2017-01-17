@@ -6,21 +6,36 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.module.network.networkmodule.TokenUtil;
+import com.module.network.networkmodule.api_v1.HttpService;
+import com.module.network.networkmodule.models.Categories;
+import com.module.network.networkmodule.models.User;
+import com.module.network.networkmodule.models.driver.Driver;
+import com.module.network.networkmodule.utils.DriverTokenUtil;
+import com.module.network.networkmodule.utils.DriverUtil;
+import com.module.network.networkmodule.utils.GsonUtil;
+import com.module.network.networkmodule.utils.UserTokenUtil;
+import com.module.network.networkmodule.utils.UserUtil;
 import com.soberdriver.client.soberdriver.R;
+import com.soberdriver.client.soberdriver.SoberDriverApp;
 import com.soberdriver.client.soberdriver.presentation.presenter.WalkthroughPresenter;
 import com.soberdriver.client.soberdriver.presentation.view.WalkthroughView;
 import com.soberdriver.client.soberdriver.ui.activity.BaseAppActivity;
-import com.soberdriver.client.soberdriver.ui.activity.MainOrderActivity;
+import com.soberdriver.client.soberdriver.ui.activity.order.MainOrderActivity;
 import com.soberdriver.client.soberdriver.ui.adapter.walkthrough.WalkthroughViewPagerAdapter;
+
+import java.io.IOException;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.relex.circleindicator.CircleIndicator;
+import okhttp3.ResponseBody;
+import rx.Observable;
+import rx.functions.Action1;
+import rx.functions.Func1;
 
 public class WalcthroughActivity extends BaseAppActivity implements WalkthroughView {
     public static final String TAG = "WalkthroughActivity";
@@ -46,8 +61,9 @@ public class WalcthroughActivity extends BaseAppActivity implements WalkthroughV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walkthrough);
+
         ButterKnife.bind(this);
-        if (!TokenUtil.getToken(this).isEmpty()) {
+        if (!UserTokenUtil.getToken(this).isEmpty()) {
             startActivity(MainOrderActivity.getIntent(this, false));
         }
         WalkthroughViewPagerAdapter adapter = new WalkthroughViewPagerAdapter(this);

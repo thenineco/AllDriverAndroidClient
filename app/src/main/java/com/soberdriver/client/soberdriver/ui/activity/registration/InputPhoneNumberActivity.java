@@ -12,12 +12,12 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.module.network.networkmodule.models.User;
 import com.soberdriver.client.soberdriver.R;
-import com.soberdriver.client.soberdriver.mvp.models.User;
 import com.soberdriver.client.soberdriver.presentation.presenter.InputPhoneNumberPresenter;
 import com.soberdriver.client.soberdriver.presentation.view.InputPhoneNumberView;
 import com.soberdriver.client.soberdriver.ui.activity.BaseAppActivity;
-import com.soberdriver.client.soberdriver.ui.activity.MainOrderActivity;
+import com.soberdriver.client.soberdriver.ui.activity.order.MainOrderActivity;
 import com.soberdriver.client.soberdriver.ui.view.SelectableEdithText;
 import com.soberdriver.client.soberdriver.ui.view.SelectablePhoneEditText;
 import com.soberdriver.client.soberdriver.utils.DisplayUtil;
@@ -114,7 +114,7 @@ public class InputPhoneNumberActivity extends BaseAppActivity implements InputPh
                         if (text.length() == 4) {
                             mPinCodeEditText.setFocusable(false);
                             mInputPhoneNumberPresenter.sendPinCodeToServer(
-                                    mUser.getUserPhoneNumber(), Integer.valueOf(text));
+                                    mUser.getPhone(), Integer.valueOf(text));
                         }
                     }
                 });
@@ -150,7 +150,7 @@ public class InputPhoneNumberActivity extends BaseAppActivity implements InputPh
     }
 
     @Override
-    public void startEnterSecurity(User user) {
+    public void startEnterSecurityCod(User user) {
         showPinContainer();
     }
 

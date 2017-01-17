@@ -16,8 +16,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.module.network.networkmodule.TokenUtil;
-import com.module.network.networkmodule.models.Address;
+import com.module.network.networkmodule.utils.UserTokenUtil;
+import com.module.network.networkmodule.models.address.Address;
 import com.module.network.networkmodule.models.orders.Order;
 import com.soberdriver.client.soberdriver.R;
 import com.soberdriver.client.soberdriver.presentation.presenter.NewOrderPresenter;
@@ -29,7 +29,6 @@ import com.soberdriver.client.soberdriver.ui.adapter.order.DriverItem;
 import com.soberdriver.client.soberdriver.ui.adapter.order.OrderDriversAdapter;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -105,7 +104,7 @@ public class NewOrderFragment extends BaseAppFragment implements NewOrderView,
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setStartParameters();
-        if (TokenUtil.getToken(getContext()).isEmpty()) {
+        if (UserTokenUtil.getToken(getContext()).isEmpty()) {
             mOrderCreateOrderBtn.setAlpha(.3f);
         }
     }
@@ -214,7 +213,7 @@ public class NewOrderFragment extends BaseAppFragment implements NewOrderView,
 
     @Override
     public void startDriverSelect() {
-        if (!TokenUtil.getToken(getContext()).isEmpty()) {
+        if (!UserTokenUtil.getToken(getContext()).isEmpty()) {
             startActivity(SelectDriverActivity.getIntent(getContext(), mDriverCount));
         }
     }

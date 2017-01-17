@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.bignerdranch.expandablerecyclerview.Adapter.ExpandableRecyclerAdapter;
 import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
 import com.soberdriver.client.soberdriver.R;
-import com.module.network.networkmodule.models.orders.Driver;
+import com.module.network.networkmodule.models.driver.Driver;
 
 import java.util.List;
 

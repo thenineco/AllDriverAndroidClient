@@ -3,11 +3,12 @@ package com.module.network.networkmodule.api_v1;
 import android.content.Context;
 
 import com.module.network.networkmodule.RetrofitFactory;
-import com.module.network.networkmodule.models.Address;
+import com.module.network.networkmodule.models.address.Address;
 import com.module.network.networkmodule.models.AuthKey;
-import com.module.network.networkmodule.models.orders.DriverDetails;
+import com.module.network.networkmodule.models.driver.DriverDetails;
 import com.module.network.networkmodule.RequestBodyCreator;
 import com.module.network.networkmodule.models.orders.Order;
+import com.module.network.networkmodule.utils.DriverUtil;
 
 import org.xmlpull.v1.sax2.Driver;
 
@@ -65,7 +66,63 @@ public class HttpService {
      * Drivers
      ***************************************************************************************/
 
-    public Observable<List<DriverDetails>> getDriversWithUserPreference(Context context,
+    public Observable<ResponseBody> createNewDriver(
+            com.module.network.networkmodule.models.driver.Driver driver) {
+        HttpRequests.Drivers request = retrofitFactory.getInstance(
+                HttpRequests.Drivers.class);
+
+        RequestBodyCreator requestBodyCreator = new RequestBodyCreator();
+
+        requestBodyCreator.addParam("name", driver.getName());
+        requestBodyCreator.addParam("categories", driver.getCategories());
+        requestBodyCreator.addParam("internationalLicence", driver.getInternationalLicence());
+        requestBodyCreator.addParam("gender", driver.getGender());
+        requestBodyCreator.addParam("isOfficial", driver.getIsOfficial());
+        requestBodyCreator.addParam("appearance", driver.getAppearance());
+        requestBodyCreator.addParam("isSmoking", driver.getIsSmoking());
+
+        HashMap<String, Object> requestBody = requestBodyCreator.getBody();
+
+        return request.createNewDriver(requestBody)
+                .subscribeOn(Schedulers.newThread());
+
+    }
+
+    public Observable<ResponseBody> openDriverSession(Context context) {
+        HttpRequests.Drivers request = retrofitFactory.getInstance(
+                HttpRequests.Drivers.class);
+
+        RequestBodyCreator requestBodyCreator = new RequestBodyCreator();
+        HashMap<String, Object> requestBody = requestBodyCreator.getBody();
+        requestBodyCreator.addParam("phone", DriverUtil.getDriver(context).getPhone());
+
+        return request.openDriverSession(requestBody)
+                .subscribeOn(Schedulers.newThread());
+    }
+
+    public Observable<ResponseBody> closeDriverSession(Context context) {
+        HttpRequests.Drivers request = retrofitFactory.getInstance(
+                HttpRequests.Drivers.class);
+
+        RequestBodyCreator requestBodyCreator = new RequestBodyCreator();
+        HashMap<String, Object> requestBody = requestBodyCreator.getBody();
+        requestBodyCreator.addParam("phone", DriverUtil.getDriver(context).getPhone());
+
+        return request.closeDriverSession(requestBody)
+                .subscribeOn(Schedulers.newThread());
+    }
+
+    public Observable<ResponseBody> getDriverById(String driverId) {
+        HttpRequests.Drivers request = retrofitFactory.getInstance(
+                HttpRequests.Drivers.class);
+        RequestBodyCreator requestBodyCreator = new RequestBodyCreator();
+        HashMap<String, Object> requestBody = requestBodyCreator.getBody();
+
+        return request.getDriverById(driverId, requestBody)
+                .subscribeOn(Schedulers.newThread());
+    }
+
+    public Observable<ResponseBody> getDriversLikeToUser(Context context,
             String userId,
             String driverId,
             int mark, String comment) {
@@ -82,11 +139,11 @@ public class HttpService {
 
         HashMap<String, Object> requestBody = requestBodyCreator.getBody();
 
-        return request.getDriversWithUserPreference(requestBody)
+        return request.getDriversLikeToUser(requestBody)
                 .subscribeOn(Schedulers.newThread());
     }
 
-    public Observable<ResponseBody> addDriversWithUserPreference(Context context, String userId,
+    public Observable<ResponseBody> addDriversLikeToUser(Context context, String userId,
             String driverId,
             int mark, String comment) {
 
@@ -102,7 +159,7 @@ public class HttpService {
 
         HashMap<String, Object> requestBody = requestBodyCreator.getBody();
 
-        return request.addUserLikeToDrivers(requestBody)
+        return request.addDriversLikeToUser(requestBody)
                 .subscribeOn(Schedulers.newThread());
     }
 
@@ -132,7 +189,7 @@ public class HttpService {
      * Users
      **************************************************************************************/
 
-    public Observable<ResponseBody> getUser(Context context) {
+    public Observable<ResponseBody> getCurrentUser(Context context) {
         HttpRequests.Users request = retrofitFactory.getInstance(
                 HttpRequests.Users.class);
 
@@ -152,15 +209,15 @@ public class HttpService {
                 .subscribeOn(Schedulers.newThread());
     }
 
-    public Observable<ResponseBody> addNewUser(Context context, String phone, String name) {
+    public Observable<ResponseBody> createNewUser(String phone, String name) {
         HttpRequests.Users request = retrofitFactory.getInstance(
                 HttpRequests.Users.class);
-        RequestBodyCreator requestBodyCreator = new RequestBodyCreator(context);
+        RequestBodyCreator requestBodyCreator = new RequestBodyCreator();
 
         requestBodyCreator.addParam("phone", phone);
         requestBodyCreator.addParam("name", name);
 
-        return request.addNewUser(requestBodyCreator.getBody())
+        return request.createNewUser(requestBodyCreator.getBody())
                 .subscribeOn(Schedulers.newThread());
     }
 
@@ -175,6 +232,48 @@ public class HttpService {
         return request.editUser(requestBodyCreator.getBody())
                 .subscribeOn(Schedulers.newThread());
     }
+
+    public Observable<ResponseBody> getUserLikeToDrivers(Context context,
+            String userId,
+            String driverId,
+            int mark, String comment) {
+
+        HttpRequests.Users request = retrofitFactory.getInstance(
+                HttpRequests.Users.class);
+
+        RequestBodyCreator requestBodyCreator = new RequestBodyCreator(context);
+
+        requestBodyCreator.addParam("userId", userId);
+        requestBodyCreator.addParam("driverId", driverId);
+        requestBodyCreator.addParam("mark", mark);
+        requestBodyCreator.addParam("comment", comment);
+
+        HashMap<String, Object> requestBody = requestBodyCreator.getBody();
+
+        return request.getUserLikeToDrivers(requestBody)
+                .subscribeOn(Schedulers.newThread());
+    }
+
+    public Observable<ResponseBody> addUserLikeToDrivers(Context context, String userId,
+            String driverId,
+            int mark, String comment) {
+
+        HttpRequests.Users request = retrofitFactory.getInstance(
+                HttpRequests.Users.class);
+
+        RequestBodyCreator requestBodyCreator = new RequestBodyCreator(context);
+
+        requestBodyCreator.addParam("userId", userId);
+        requestBodyCreator.addParam("driverId", driverId);
+        requestBodyCreator.addParam("mark", mark);
+        requestBodyCreator.addParam("comment", comment);
+
+        HashMap<String, Object> requestBody = requestBodyCreator.getBody();
+
+        return request.addUserLikeToDrivers(requestBody)
+                .subscribeOn(Schedulers.newThread());
+    }
+
 
     /******************************************************************************************
      * Orders
@@ -241,6 +340,29 @@ public class HttpService {
                 .subscribeOn(Schedulers.newThread());
     }
 
+    public Observable<ResponseBody> getActiveOrders(Context context) {
+        HttpRequests.Orders request = retrofitFactory.getInstance(
+                HttpRequests.Orders.class);
+        RequestBodyCreator requestBodyCreator = new RequestBodyCreator(context);
+        return request.callDriversForDriver(requestBodyCreator.getBody())
+                .subscribeOn(Schedulers.newThread());
+    }
+
+    public Observable<ResponseBody> getOrderPrice(Context context, Address destinationAddress,
+            Address departureAddress) {
+
+        HttpRequests.Orders request = retrofitFactory.getInstance(
+                HttpRequests.Orders.class);
+        RequestBodyCreator requestBodyCreator = new RequestBodyCreator(context);
+
+        requestBodyCreator.addParam("destinationLatitude", destinationAddress.getLatitude());
+        requestBodyCreator.addParam("departureLatitude", departureAddress.getLatitude());
+        requestBodyCreator.addParam("destinationLongtitude", destinationAddress.getLongitude());
+        requestBodyCreator.addParam("departureLongtitude", departureAddress.getLongitude());
+
+        return request.callDriversForDriver(requestBodyCreator.getBody())
+                .subscribeOn(Schedulers.newThread());
+    }
 
     public Observable<ResponseBody> pickOrder(Context context, String orderId) {
         HttpRequests.Orders request = retrofitFactory.getInstance(

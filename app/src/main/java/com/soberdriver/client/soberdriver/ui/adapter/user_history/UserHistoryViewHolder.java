@@ -3,7 +3,7 @@ package com.soberdriver.client.soberdriver.ui.adapter.user_history;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.module.network.networkmodule.models.orders.Driver;
+import com.module.network.networkmodule.models.driver.Driver;
 
 /**
  * Created by zest .

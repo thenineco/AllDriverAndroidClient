@@ -1,4 +1,4 @@
-package com.soberdriver.client.soberdriver.ui.activity;
+package com.soberdriver.client.soberdriver.ui.activity.order;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,8 +14,14 @@ import android.view.ViewGroup;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.soberdriver.client.soberdriver.R;
+import com.soberdriver.client.soberdriver.SoberDriverApp;
 import com.soberdriver.client.soberdriver.presentation.presenter.MainOrderPresenter;
 import com.soberdriver.client.soberdriver.presentation.view.MainOrderView;
+import com.soberdriver.client.soberdriver.ui.activity.BaseAppActivity;
+import com.soberdriver.client.soberdriver.ui.activity.PaymentActivity;
+import com.soberdriver.client.soberdriver.ui.activity.PromoActivity;
+import com.soberdriver.client.soberdriver.ui.activity.UserDriversActivity;
+import com.soberdriver.client.soberdriver.ui.activity.UserProfileActivity;
 import com.soberdriver.client.soberdriver.ui.fragment.BaseAppFragment;
 import com.soberdriver.client.soberdriver.ui.fragment.NewOrderFragment;
 import com.soberdriver.client.soberdriver.ui.fragment.RangeOfServiceFragment;
@@ -115,7 +121,7 @@ public class MainOrderActivity extends BaseAppActivity implements MainOrderView 
     }
 
     private void setToolbar() {
-        mToolbarView.setToolbarTitle("Driver in Time");
+        mToolbarView.setToolbarTitle("DRIVER in Time");
         Toolbar toolbar = mToolbarView.getToolbar();
         setSupportActionBar(toolbar);
 

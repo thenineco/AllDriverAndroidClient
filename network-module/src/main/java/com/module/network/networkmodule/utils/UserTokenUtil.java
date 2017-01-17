@@ -1,4 +1,4 @@
-package com.module.network.networkmodule;
+package com.module.network.networkmodule.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -7,23 +7,24 @@ import android.content.SharedPreferences;
  * Created by roman
  */
 
-public abstract class PhoneUtil {
+public abstract class UserTokenUtil {
 
-    public static final String PHONE = "phone";
+    public static final String USER_TOKEN = "user_token";
     public static final String PREFERENCE = "preference";
 
-    public static String getPhone(Context context) {
+    public static String getToken(Context context) {
         SharedPreferences preferences = context
                 .getSharedPreferences(PREFERENCE, Context.MODE_PRIVATE);
-        String token = preferences.getString(PHONE, "");
+        String token = preferences.getString(USER_TOKEN, "");
         return token;
     }
 
-    public static void savePhone(Context context, String phone) {
+    public static void saveToken(Context context, String token) {
         SharedPreferences preferences = context
                 .getSharedPreferences(PREFERENCE,
                         Context.MODE_PRIVATE);
-        preferences.edit().putString(PHONE, phone)
+        preferences.edit().putString(USER_TOKEN, token)
                 .apply();
     }
+
 }

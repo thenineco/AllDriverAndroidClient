@@ -10,7 +10,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.soberdriver.client.soberdriver.R;
 import com.soberdriver.client.soberdriver.presentation.presenter.RangeOfPresenter;
 import com.soberdriver.client.soberdriver.presentation.view.RangeOfView;
-import com.soberdriver.client.soberdriver.ui.activity.MainOrderActivity;
+import com.soberdriver.client.soberdriver.ui.activity.order.MainOrderActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

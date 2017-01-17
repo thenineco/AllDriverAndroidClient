@@ -1,15 +1,21 @@
 package com.module.network.networkmodule.models.orders;
 
 import com.google.gson.annotations.SerializedName;
-import com.module.network.networkmodule.models.Address;
+import com.module.network.networkmodule.models.address.Address;
+import com.module.network.networkmodule.models.driver.Driver;
+import com.module.network.networkmodule.models.driver.DriverDetails;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by zestxx
  */
 
 public class Order {
+
+    @SerializedName("_id")
+    private String orderId;
     @SerializedName("status")
     private int status;
     @SerializedName("userId")
@@ -20,6 +26,8 @@ public class Order {
     private boolean asSoonAsPossible;
     @SerializedName("orderDate")
     private Date orderDate;
+    @SerializedName("drivers")
+    private List<Driver> mDriverList;
 
     private String driverId;
     private Date added;
@@ -31,6 +39,23 @@ public class Order {
     public Order(Address location, Date orderDate) {
         this.location = location;
         this.orderDate = orderDate;
+    }
+
+    public List<Driver> getDriverList() {
+        return mDriverList;
+    }
+
+    public void setDriverList(
+            List<Driver> driverList) {
+        mDriverList = driverList;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
     public String getUserId() {

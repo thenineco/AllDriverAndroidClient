@@ -79,4 +79,6 @@ dependencies {
     /*Secure preference*/
     compile 'com.scottyab:secure-preferences-lib:0.1.4'
     compile project(':network-module')
+    /*WebSocket client.*/
+    compile 'com.neovisionaries:nv-websocket-client:1.31'
 }

@@ -16,7 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.module.network.networkmodule.models.orders.Driver;
+import com.module.network.networkmodule.models.driver.Driver;
 import com.soberdriver.client.soberdriver.R;
 import com.soberdriver.client.soberdriver.presentation.presenter.SelectDriverPresenter;
 import com.soberdriver.client.soberdriver.presentation.view.SelectDriverView;
