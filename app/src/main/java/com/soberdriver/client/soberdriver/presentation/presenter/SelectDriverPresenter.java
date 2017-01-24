@@ -37,4 +37,13 @@ public class SelectDriverPresenter extends MvpPresenter<SelectDriverView> {
     }
 
 
+    public void cancelOrder(String orderId) {
+        HttpService.getInstance()
+                .cancelOrder(SoberDriverApp.getContext(), orderId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(responseBody -> {
+                    getViewState().closeOrder();
+                }, Throwable::printStackTrace);
+    }
+
 }

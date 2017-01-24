@@ -7,7 +7,7 @@ import com.soberdriver.client.soberdriver.services.chat_service.models.SocketMes
 /**
  * Created by zest .
  */
-public interface ClientWebSocket {
+public interface SocketClient {
     void connect();
 
     void closeSocket();
@@ -18,9 +18,12 @@ public interface ClientWebSocket {
 
     boolean networkIsAvailable();
 
-    boolean isSocketIsOpen();
+    boolean socketIsOpen();
 
     void setSocketIsOpen(boolean socketIsOpen);
 
     WebSocket getConnection();
+
+    void release();
+
 }

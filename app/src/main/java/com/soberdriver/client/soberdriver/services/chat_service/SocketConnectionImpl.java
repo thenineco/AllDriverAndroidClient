@@ -12,7 +12,7 @@ import com.soberdriver.client.soberdriver.services.chat_service.models.SocketMes
 public class SocketConnectionImpl implements SocketConnection {
 
     public static final String TAG = "SocketConnection";
-    private static ClientWebSocket clientWebSocket;
+    private static SocketClient sSocketClient;
     private Context context;
     private String mOrderId;
     private Handler socketConnectionHandler;
@@ -20,7 +20,7 @@ public class SocketConnectionImpl implements SocketConnection {
         @Override
         public void run() {
             try {
-                if (clientWebSocket != null && !clientWebSocket.getConnection().isOpen()) {
+                if (sSocketClient != null && !sSocketClient.socketIsOpen()) {
                     openConnection();
                 }
                 startCheckConnection();
@@ -58,14 +58,12 @@ public class SocketConnectionImpl implements SocketConnection {
 
     @Override
     public void openConnection() {
-        if (clientWebSocket != null && clientWebSocket.isSocketIsOpen()) {
-            clientWebSocket.closeSocket();
-        }
-        clientWebSocket = new ClientWebSocketImpl(mOrderId);
-        try {
-            clientWebSocket.connect();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (sSocketClient != null) {
+            sSocketClient.closeSocket();
+            sSocketClient.connect();
+        } else {
+            sSocketClient = new SocketIOClient(mOrderId);
+            sSocketClient.connect();
         }
         initScreenStateListener();
         startCheckConnection();
@@ -73,9 +71,10 @@ public class SocketConnectionImpl implements SocketConnection {
 
     @Override
     public void closeConnection() {
-        if (clientWebSocket != null) {
-            clientWebSocket.closeSocket();
-            clientWebSocket = null;
+        if (sSocketClient != null) {
+            sSocketClient.closeSocket();
+            sSocketClient.release();
+            sSocketClient = null;
         }
         releaseScreenStateListener();
         stopCheckConnection();
@@ -99,13 +98,12 @@ public class SocketConnectionImpl implements SocketConnection {
 
     @Override
     public boolean isConnected() {
-        return clientWebSocket != null &&
-                clientWebSocket.getConnection() != null &&
-                clientWebSocket.getConnection().isOpen();
+        return sSocketClient != null &&
+                sSocketClient.socketIsOpen();
     }
 
 
     public static void sendMessage(SocketMessage socketMessage) {
-        clientWebSocket.sendMessage(socketMessage);
+        sSocketClient.sendMessage(socketMessage);
     }
 }

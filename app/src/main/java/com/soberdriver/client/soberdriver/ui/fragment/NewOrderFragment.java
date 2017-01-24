@@ -212,9 +212,9 @@ public class NewOrderFragment extends BaseAppFragment implements NewOrderView,
     }
 
     @Override
-    public void startDriverSelect() {
+    public void startDriverSelect(String orderId) {
         if (!UserTokenUtil.getToken(getContext()).isEmpty()) {
-            startActivity(SelectDriverActivity.getIntent(getContext(), mDriverCount));
+            startActivity(SelectDriverActivity.getIntent(getContext(), mDriverCount, orderId));
         }
     }
 

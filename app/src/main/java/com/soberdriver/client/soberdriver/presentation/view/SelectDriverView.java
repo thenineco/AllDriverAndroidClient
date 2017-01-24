@@ -11,4 +11,6 @@ public interface SelectDriverView extends MvpView {
     void openDriverInfo();
 
     void selectDriver(Driver driver);
+
+    void closeOrder();
 }

@@ -115,6 +115,10 @@ public class HttpRequests {
         Observable<ResponseBody> getOrderPrice(@QueryMap HashMap<String, Object> queryMap);
     }
 
+    interface Test {
+        @POST("/users")
+        Observable<ResponseBody> test(@QueryMap HashMap<String, Object> queryMap);
+    }
 //    interface TokenRequests {
 //        @POST(API_PREFIX + "/token")
 //        Observable<Token> getToken(@Query("code") String verifyCod,

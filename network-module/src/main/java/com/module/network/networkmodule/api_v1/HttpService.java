@@ -2,11 +2,10 @@ package com.module.network.networkmodule.api_v1;
 
 import android.content.Context;
 
-import com.module.network.networkmodule.RetrofitFactory;
-import com.module.network.networkmodule.models.address.Address;
-import com.module.network.networkmodule.models.AuthKey;
-import com.module.network.networkmodule.models.driver.DriverDetails;
 import com.module.network.networkmodule.RequestBodyCreator;
+import com.module.network.networkmodule.RetrofitFactory;
+import com.module.network.networkmodule.models.AuthKey;
+import com.module.network.networkmodule.models.address.Address;
 import com.module.network.networkmodule.models.orders.Order;
 import com.module.network.networkmodule.utils.DriverUtil;
 
@@ -370,6 +369,17 @@ public class HttpService {
         RequestBodyCreator requestBodyCreator = new RequestBodyCreator(context);
 
         return request.pickOrder(orderId, requestBodyCreator.getBody())
+                .subscribeOn(Schedulers.newThread());
+    }
+
+    public Observable<ResponseBody> test() {
+        HttpRequests.Test request = retrofitFactory.getInstance(
+                HttpRequests.Test.class);
+        RequestBodyCreator requestBodyCreator = new RequestBodyCreator();
+//        requestBodyCreator.addParam("name", "asdasadad");
+//        requestBodyCreator.addParam("age", 65);
+
+        return request.test(requestBodyCreator.getBody())
                 .subscribeOn(Schedulers.newThread());
     }
 

@@ -28,9 +28,9 @@ import rx.subjects.BehaviorSubject;
 /**
  * Created by zest .
  */
-public class ClientWebSocketImpl implements ClientWebSocket {
+public class WebSocketClient implements SocketClient {
 
-    private static final String TAG = "ClientWebSocket";
+    private static final String TAG = "SocketClient";
     private static final String DEV_SOCKET_HOST = "http://46.101.157.129:4001/orders/";
 
     private static BehaviorSubject<SocketMessage> sUserStatusBehaviorSubject =
@@ -42,7 +42,7 @@ public class ClientWebSocketImpl implements ClientWebSocket {
     private static WebSocketFactory mWebSocketFactory;
     private String mOrderId;
 
-    public ClientWebSocketImpl(String orderId) {
+    public WebSocketClient(String orderId) {
         mOrderId = orderId;
         mWebSocketFactory = new WebSocketFactory();
     }
@@ -169,8 +169,8 @@ public class ClientWebSocketImpl implements ClientWebSocket {
 
 
     @Override
-    public boolean isSocketIsOpen() {
-        return socketIsOpen;
+    public boolean socketIsOpen() {
+        return webSocket.isOpen();
     }
 
     @Override
@@ -181,6 +181,12 @@ public class ClientWebSocketImpl implements ClientWebSocket {
     @Override
     public WebSocket getConnection() {
         return webSocket;
+    }
+
+    @Override
+    public void release() {
+        webSocket.disconnect();
+        webSocket = null;
     }
 
 

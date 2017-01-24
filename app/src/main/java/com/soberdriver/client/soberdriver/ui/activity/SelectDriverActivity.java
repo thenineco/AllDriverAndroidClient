@@ -34,6 +34,8 @@ public class SelectDriverActivity extends BaseAppActivity implements SelectDrive
         View.OnClickListener {
     public static final String TAG = "SelectDriverActivity";
     public static final String DRIVER_COUNT = "driver_count";
+    public static final String ORDER_ID = "order_id";
+
     @InjectPresenter
     SelectDriverPresenter mSelectDriverPresenter;
     @BindView(R.id.select_driver_info_text_view)
@@ -54,9 +56,10 @@ public class SelectDriverActivity extends BaseAppActivity implements SelectDrive
     RecyclerView mDriversRecyclerView;
     private DriverSelectListener mDriverSelectListener;
 
-    public static Intent getIntent(final Context context, int driverCount) {
+    public static Intent getIntent(final Context context, int driverCount, String orderId) {
         Intent intent = new Intent(context, SelectDriverActivity.class);
         intent.putExtra(DRIVER_COUNT, driverCount);
+        intent.putExtra(ORDER_ID, orderId);
         return intent;
     }
 
@@ -67,7 +70,6 @@ public class SelectDriverActivity extends BaseAppActivity implements SelectDrive
         setContentView(R.layout.activity_select_driver);
         ButterKnife.bind(this);
         setStartParams();
-
     }
 
     private void setStartParams() {
@@ -81,7 +83,7 @@ public class SelectDriverActivity extends BaseAppActivity implements SelectDrive
                 + "будет мэджик!\n"
                 + ":)");
 
-        mDriverSelectListener = driver -> selectDriver(driver);
+        mDriverSelectListener = this::selectDriver;
     }
 
     private void setViewPager(List<Driver> drivers) {
@@ -111,7 +113,8 @@ public class SelectDriverActivity extends BaseAppActivity implements SelectDrive
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.select_driver_cancel_the_order_btn:
-                onBackPressed();
+                String orderId = getIntent().getStringExtra(ORDER_ID);
+                mSelectDriverPresenter.cancelOrder(orderId);
                 break;
             case R.id.select_driver_about_safety_btn:
                 break;
@@ -122,6 +125,7 @@ public class SelectDriverActivity extends BaseAppActivity implements SelectDrive
                 break;
         }
     }
+
 
     private void startDriverFind() {
         mInfoTextView.setText("Мы ищем для вас \n водителя");
@@ -168,6 +172,11 @@ public class SelectDriverActivity extends BaseAppActivity implements SelectDrive
     @Override
     public void selectDriver(Driver driver) {
         startActivity(DriverInRoadActivity.getIntent(this, driver));
+        finish();
+    }
+
+    @Override
+    public void closeOrder() {
         finish();
     }
 
