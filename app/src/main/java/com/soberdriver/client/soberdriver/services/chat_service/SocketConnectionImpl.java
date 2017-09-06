@@ -106,4 +106,8 @@ public class SocketConnectionImpl implements SocketConnection {
     public static void sendMessage(SocketMessage socketMessage) {
         sSocketClient.sendMessage(socketMessage);
     }
+
+    public void setOrderId(String orderId) {
+        mOrderId = orderId;
+    }
 }

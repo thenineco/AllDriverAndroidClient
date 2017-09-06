@@ -21,17 +21,14 @@ public class SelectDriverPresenter extends MvpPresenter<SelectDriverView> {
         HttpService.getInstance()
                 .getOrderDrivers(SoberDriverApp.getContext())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<ResponseBody>() {
-                    @Override
-                    public void call(ResponseBody responseBody) {
-                        try {
-                            DriversResponse responseObject = GsonUtil.getGson()
-                                    .fromJson(responseBody.string(), DriversResponse.class);
+                .subscribe(responseBody -> {
+                    try {
+                        DriversResponse responseObject = GsonUtil.getGson()
+                                .fromJson(responseBody.string(), DriversResponse.class);
 
-                            getViewState().showDrivers(responseObject.getDrivers());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        getViewState().showDrivers(responseObject.getDrivers());
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 }, Throwable::printStackTrace);
     }
@@ -42,6 +39,7 @@ public class SelectDriverPresenter extends MvpPresenter<SelectDriverView> {
                 .cancelOrder(SoberDriverApp.getContext(), orderId)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(responseBody -> {
+                    ((SoberDriverApp) SoberDriverApp.getContext()).closeSocketConnection();
                     getViewState().closeOrder();
                 }, Throwable::printStackTrace);
     }

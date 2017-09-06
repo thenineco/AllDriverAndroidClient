@@ -16,9 +16,9 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.module.network.networkmodule.utils.UserTokenUtil;
 import com.module.network.networkmodule.models.address.Address;
 import com.module.network.networkmodule.models.orders.Order;
+import com.module.network.networkmodule.utils.UserTokenUtil;
 import com.soberdriver.client.soberdriver.R;
 import com.soberdriver.client.soberdriver.presentation.presenter.NewOrderPresenter;
 import com.soberdriver.client.soberdriver.presentation.view.NewOrderView;
@@ -40,6 +40,8 @@ public class NewOrderFragment extends BaseAppFragment implements NewOrderView,
         OrderDriversAdapter.OnItemClickListener {
 
     public static final String TAG = "NewOrderFragment";
+    @BindView(R.id.order_create_progress_bar_container)
+    FrameLayout mProgressBarContainer;
 
     private int mDriverCount = 1;
 
@@ -240,6 +242,16 @@ public class NewOrderFragment extends BaseAppFragment implements NewOrderView,
                 mOrderClientLocation.setText(address);
             }
         }
+    }
+
+    @Override
+    public void showProgressBar() {
+        mProgressBarContainer.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        mProgressBarContainer.setVisibility(View.GONE);
     }
 
     @Override

@@ -65,6 +65,7 @@ public class WalcthroughActivity extends BaseAppActivity implements WalkthroughV
         ButterKnife.bind(this);
         if (!UserTokenUtil.getToken(this).isEmpty()) {
             startActivity(MainOrderActivity.getIntent(this, false));
+            finish();
         }
         WalkthroughViewPagerAdapter adapter = new WalkthroughViewPagerAdapter(this);
         mWalkthroughViewPager.setAdapter(adapter);

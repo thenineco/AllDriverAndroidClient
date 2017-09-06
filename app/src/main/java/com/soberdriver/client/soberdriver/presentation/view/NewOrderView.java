@@ -9,4 +9,8 @@ public interface NewOrderView extends MvpView {
     void startDriverSelect(String orderId);
 
     void openDriverFilter();
+
+    void showProgressBar();
+
+    void hideProgressBar();
 }

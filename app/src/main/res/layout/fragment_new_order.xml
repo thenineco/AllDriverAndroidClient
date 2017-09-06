@@ -1,9 +1,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/order_main_container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorWhite">
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:id="@+id/order_main_container"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/colorWhite">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,20 +24,20 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:enabled="false"
-                app:srcCompat="@drawable/minus_circle_outline" />
+                app:srcCompat="@drawable/minus_circle_outline"/>
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/order_plus_btn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical|right"
-                app:srcCompat="@drawable/plus_circle_outline" />
+                app:srcCompat="@drawable/plus_circle_outline"/>
 
             <android.support.v7.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="количество водителей" />
+                android:text="количество водителей"/>
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/order_driver_count"
@@ -46,14 +46,14 @@
                 android:layout_gravity="center_horizontal|bottom"
                 android:text="1"
                 android:textColor="@color/colorBlack"
-                android:textSize="30sp" />
+                android:textSize="30sp"/>
         </FrameLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="10dp"
-            android:background="@color/colorBlack" />
+            android:background="@color/colorBlack"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/order_drivers_recycler_view"
@@ -61,7 +61,7 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="100dp"
             android:layout_marginTop="20dp"
-            android:visibility="gone" />
+            android:visibility="gone"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -69,7 +69,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
             android:text="Откуда вас забрать?"
-            android:textSize="15dp" />
+            android:textSize="15dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,20 +83,20 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_weight="1"
-                android:text="Ваше местоположение" />
+                android:text="Ваше местоположение"/>
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/order_location_btn"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                app:srcCompat="@drawable/map_marker" />
+                app:srcCompat="@drawable/map_marker"/>
         </LinearLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="10dp"
-            android:background="@color/colorBlack" />
+            android:background="@color/colorBlack"/>
 
         <LinearLayout
             android:id="@+id/order_final_location_info_container"
@@ -112,14 +112,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Дом, улица, город ..." />
+                android:text="Дом, улица, город ..."/>
 
             <android.support.v7.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="примерная стоимость поездки"
                 android:textColor="@color/colorBlack"
-                android:textSize="20dp" />
+                android:textSize="20dp"/>
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/the_cost_of_travel_text_view"
@@ -128,14 +128,14 @@
                 android:layout_gravity="center"
                 android:text="2500-2700"
                 android:textColor="@color/colorBlack"
-                android:textSize="20dp" />
+                android:textSize="20dp"/>
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:background="@color/colorBlack" />
+                android:background="@color/colorBlack"/>
 
         </LinearLayout>
 
@@ -154,14 +154,14 @@
                 android:layout_height="wrap_content"
                 android:text="примерная стоимость поездки"
                 android:textColor="@color/colorBlack"
-                android:textSize="20dp" />
+                android:textSize="20dp"/>
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:background="@color/colorBlack" />
+                android:background="@color/colorBlack"/>
 
         </LinearLayout>
 
@@ -178,18 +178,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Приехать"
-                android:textSize="15dp" />
+                android:textSize="15dp"/>
 
             <android.support.v7.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="как можно скорее"
-                android:textSize="15dp" />
+                android:textSize="15dp"/>
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorBlack" />
+                android:background="@color/colorBlack"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -214,19 +214,19 @@
                 android:layout_height="wrap_content"
                 android:text="Уточнить детали по водителю"
                 android:textColor="@color/colorBlack"
-                android:textSize="20sp" />
+                android:textSize="20sp"/>
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorBlack" />
+                android:background="@color/colorBlack"/>
 
             <android.support.v7.widget.AppCompatTextView
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="Вы можете выбрать его категорию, одежду и т.д" />
+                android:text="Вы можете выбрать его категорию, одежду и т.д"/>
         </LinearLayout>
 
 
@@ -238,7 +238,20 @@
             android:layout_marginTop="20dp"
             android:background="@color/colorPrimaryDark"
             android:text="Вызвать"
-            android:textColor="@color/colorWhite" />
-
+            android:textColor="@color/colorWhite"/>
     </LinearLayout>
+    <FrameLayout
+        android:id="@+id/order_create_progress_bar_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+        <FrameLayout android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:alpha=".4"
+                     android:background="@color/colorBlack"/>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+    </FrameLayout>
 </FrameLayout>

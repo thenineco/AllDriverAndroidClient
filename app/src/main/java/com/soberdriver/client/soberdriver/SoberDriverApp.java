@@ -20,7 +20,7 @@ public class SoberDriverApp extends Application {
         context = this;
     }
 
-    private static SocketConnectionImpl mSocketConnection;
+    private static SocketConnectionImpl sSocketConnection;
     private BackgroundManager.Listener appActivityListener;
 
 
@@ -51,19 +51,20 @@ public class SoberDriverApp extends Application {
     }
 
     public void startSocketByOrderId(String orderId) {
-        if (mSocketConnection == null) {
-            mSocketConnection = new SocketConnectionImpl(getContext(),orderId);
+        if (sSocketConnection == null) {
+            sSocketConnection = new SocketConnectionImpl(getContext(), orderId);
             BackgroundManager.get(this).registerListener(appActivityListener);
+        } else {
+            sSocketConnection.setOrderId(orderId);
+            openSocketConnection();
         }
     }
 
-
-
     public void closeSocketConnection() {
-        mSocketConnection.closeConnection();
+        sSocketConnection.closeConnection();
     }
 
     public void openSocketConnection() {
-        mSocketConnection.openConnection();
+        sSocketConnection.openConnection();
     }
 }

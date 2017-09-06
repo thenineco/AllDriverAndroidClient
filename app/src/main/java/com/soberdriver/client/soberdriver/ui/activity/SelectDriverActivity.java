@@ -176,6 +176,11 @@ public class SelectDriverActivity extends BaseAppActivity implements SelectDrive
     }
 
     @Override
+    public void onBackPressed() {
+
+    }
+
+    @Override
     public void closeOrder() {
         finish();
     }

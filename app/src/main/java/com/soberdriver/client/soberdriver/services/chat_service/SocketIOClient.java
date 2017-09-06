@@ -9,7 +9,6 @@ import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.engineio.client.EngineIOException;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
-import com.neovisionaries.ws.client.WebSocket;
 import com.soberdriver.client.soberdriver.SoberDriverApp;
 import com.soberdriver.client.soberdriver.services.chat_service.models.SocketMessage;
 
@@ -24,10 +23,26 @@ import java.net.URISyntaxException;
 public class SocketIOClient implements SocketClient {
 
     private static final String TAG = "SocketIOClient";
+
     private static final String DEV_SOCKET_HOST = "http://46.101.157.129:4001/orders/";
+
+    public static final String ORDER_ADDED = "orderAdded";
+
+    public static final String PICK_ORDER = "pick-order";
+
+    public static final String DRIVER_CHOSEN = "driver-chosen";
+
+    public static final String DRIVER_ARRIVED = "driver-arrived";
+
+    public static final String CLIENT_PICKED = "client-picked";
+
+    public static final String ORDER_FINISHED = "order-finished";
+
+    public static final String ORDER_CANCELED = "order-canceled";
+
     private static Socket mSocket;
     private boolean socketIsOpen;
-    private Emitter.Listener messageEventListener;
+    private Emitter.Listener orderAddedEventListener;
     private Emitter.Listener errorEventListener;
     private Emitter.Listener connectionErrorEventListener;
     private Emitter.Listener connectEventListener;
@@ -36,12 +51,18 @@ public class SocketIOClient implements SocketClient {
     private Emitter.Listener reconnectErrorEventListener;
     private Emitter.Listener reconnectEventListener;
     private Emitter.Listener reconnectingEventListener;
+    private Emitter.Listener pickOrderEventListener;
+    private Emitter.Listener driverChosenEventListener;
+    private Emitter.Listener driverArrivedEventListener;
+    private Emitter.Listener clientPickedEventListener;
+    private Emitter.Listener orderFinishedEventListener;
+    private Emitter.Listener orderCanceledEventListener;
 
     public SocketIOClient(String orderId) {
         try {
             mSocket = IO.socket(DEV_SOCKET_HOST + orderId);
             setSocketEventListener();
-            Log.i(TAG, "Socket created");
+            Log.i(TAG, "Socket for order " + orderId + " created");
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -50,7 +71,9 @@ public class SocketIOClient implements SocketClient {
     private void setSocketEventListener() {
         connectEventListener = args -> {
             socketIsOpen = true;
-            Log.i(TAG, "Socket connected");
+            mSocket.emit("chat message",
+                    "even connect: message sent from android to socketio server");
+            Log.i(TAG, "Socket  connected ");
         };
 
         disconnectEventListener = args -> {
@@ -68,10 +91,6 @@ public class SocketIOClient implements SocketClient {
             Log.w(TAG, "Socket error");
             Log.i(TAG, args[0].toString());
         };
-        messageEventListener = args -> {
-            JSONObject jsonObject = (JSONObject) args[0];
-            Log.i(TAG, jsonObject.toString());
-        };
         connectTimeoutEventListener = args -> {
             socketIsOpen = false;
             Log.w(TAG, "connecting timeout");
@@ -88,17 +107,49 @@ public class SocketIOClient implements SocketClient {
             socketIsOpen = false;
             Log.w(TAG, "Socket reconnecting");
         };
+        orderAddedEventListener = args -> {
+            JSONObject data = (JSONObject) args[0];
+            Log.i(TAG, data.toString());
+        };
+        pickOrderEventListener = args -> {
+            JSONObject data = (JSONObject) args[0];
+            Log.i(TAG, data.toString());
+        };
+        driverChosenEventListener = args -> {
+            JSONObject data = (JSONObject) args[0];
+            Log.i(TAG, data.toString());
+        };
+        driverArrivedEventListener = args -> {
+            JSONObject data = (JSONObject) args[0];
+            Log.i(TAG, data.toString());
+        };
+        clientPickedEventListener = args -> {
+            JSONObject data = (JSONObject) args[0];
+            Log.i(TAG, data.toString());
+        };
+        orderFinishedEventListener = args -> {
+            JSONObject data = (JSONObject) args[0];
+            Log.i(TAG, data.toString());
+        };
+        orderCanceledEventListener = args -> {
+            JSONObject data = (JSONObject) args[0];
+            Log.i(TAG, data.toString());
+        };
 
         mSocket.on(Socket.EVENT_CONNECT, connectEventListener)
                 .on(Socket.EVENT_DISCONNECT, disconnectEventListener)
                 .on(Socket.EVENT_CONNECT_ERROR, connectionErrorEventListener)
                 .on(Socket.EVENT_ERROR, errorEventListener)
-                .on("new message", messageEventListener)
                 .on(Socket.EVENT_CONNECT_TIMEOUT, connectTimeoutEventListener)
                 .on(Socket.EVENT_RECONNECT, reconnectEventListener)
                 .on(Socket.EVENT_RECONNECT_ERROR, reconnectErrorEventListener)
-                .on(Socket.EVENT_RECONNECTING, reconnectingEventListener);
-
+                .on(Socket.EVENT_RECONNECTING, reconnectingEventListener)
+                .on(ORDER_ADDED, orderAddedEventListener)
+                .on(PICK_ORDER, pickOrderEventListener)
+                .on(DRIVER_CHOSEN, driverChosenEventListener)
+                .on(DRIVER_ARRIVED, driverArrivedEventListener)
+                .on(CLIENT_PICKED, clientPickedEventListener)
+                .on(ORDER_FINISHED, orderFinishedEventListener);
     }
 
     @Override
@@ -108,7 +159,7 @@ public class SocketIOClient implements SocketClient {
 
     @Override
     public void closeSocket() {
-        mSocket.close();
+        mSocket.disconnect();
     }
 
     @Override
@@ -142,21 +193,22 @@ public class SocketIOClient implements SocketClient {
     }
 
     @Override
-    public WebSocket getConnection() {
-        return null;
-    }
-
-    @Override
     public void release() {
+        mSocket.disconnect();
         mSocket.off(Socket.EVENT_CONNECT, connectEventListener)
                 .off(Socket.EVENT_DISCONNECT, disconnectEventListener)
                 .off(Socket.EVENT_CONNECT_ERROR, connectionErrorEventListener)
                 .off(Socket.EVENT_ERROR, errorEventListener)
-                .off(Socket.EVENT_MESSAGE, messageEventListener)
+                .off(Socket.EVENT_MESSAGE, orderAddedEventListener)
                 .off(Socket.EVENT_CONNECT_TIMEOUT, connectTimeoutEventListener)
                 .off(Socket.EVENT_RECONNECT, reconnectEventListener)
                 .off(Socket.EVENT_RECONNECT_ERROR, reconnectErrorEventListener)
-                .off(Socket.EVENT_RECONNECTING, reconnectingEventListener);
-        mSocket.disconnect();
+                .off(Socket.EVENT_RECONNECTING, reconnectingEventListener)
+                .off(ORDER_ADDED, orderAddedEventListener)
+                .off(PICK_ORDER, pickOrderEventListener)
+                .off(DRIVER_CHOSEN, driverChosenEventListener)
+                .off(DRIVER_ARRIVED, driverArrivedEventListener)
+                .off(CLIENT_PICKED, clientPickedEventListener)
+                .off(ORDER_FINISHED, orderFinishedEventListener);
     }
 }
